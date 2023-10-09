@@ -1,11 +1,11 @@
 package de.unisaarland.cs.se.selab.controller
 
 import de.unisaarland.cs.se.selab.logger.Logger
+import de.unisaarland.cs.se.selab.model.Emergency
 import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.assets.AssetRequest
 import de.unisaarland.cs.se.selab.model.assets.Vehicle
 import de.unisaarland.cs.se.selab.model.assets.getNecessaryAssets
-import de.unisaarland.cs.se.selab.model.Emergency
 
 /**
  * A response to an emergency.

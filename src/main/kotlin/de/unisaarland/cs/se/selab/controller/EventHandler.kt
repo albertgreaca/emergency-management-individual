@@ -1,10 +1,10 @@
 package de.unisaarland.cs.se.selab.controller
 
 import de.unisaarland.cs.se.selab.logger.Logger
-import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.Event
 import de.unisaarland.cs.se.selab.model.NoEvent
 import de.unisaarland.cs.se.selab.model.RoadEvent
+import de.unisaarland.cs.se.selab.model.SimulationData
 
 /**
  * Handles events.

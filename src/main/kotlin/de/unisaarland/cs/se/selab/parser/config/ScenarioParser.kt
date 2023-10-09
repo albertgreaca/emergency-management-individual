@@ -1,7 +1,5 @@
 package de.unisaarland.cs.se.selab.parser.config
 
-import de.unisaarland.cs.se.selab.model.ScenarioData
-import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.Accident
 import de.unisaarland.cs.se.selab.model.ConstructionSite
 import de.unisaarland.cs.se.selab.model.Crime
@@ -9,10 +7,12 @@ import de.unisaarland.cs.se.selab.model.Emergency
 import de.unisaarland.cs.se.selab.model.Event
 import de.unisaarland.cs.se.selab.model.Fire
 import de.unisaarland.cs.se.selab.model.MedicalEmergency
-import de.unisaarland.cs.se.selab.model.VehicleUnavailable
 import de.unisaarland.cs.se.selab.model.RoadClosure
 import de.unisaarland.cs.se.selab.model.RushHour
+import de.unisaarland.cs.se.selab.model.ScenarioData
+import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.TrafficJam
+import de.unisaarland.cs.se.selab.model.VehicleUnavailable
 import de.unisaarland.cs.se.selab.model.map.Node
 import de.unisaarland.cs.se.selab.model.map.Road
 import de.unisaarland.cs.se.selab.parser.PrimaryStreetType

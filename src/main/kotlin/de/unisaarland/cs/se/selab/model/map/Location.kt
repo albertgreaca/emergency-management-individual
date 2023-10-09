@@ -1,8 +1,8 @@
 package de.unisaarland.cs.se.selab.model.map
 
-import de.unisaarland.cs.se.selab.model.assets.Vehicle
 import de.unisaarland.cs.se.selab.model.NoEvent
 import de.unisaarland.cs.se.selab.model.RoadEvent
+import de.unisaarland.cs.se.selab.model.assets.Vehicle
 import de.unisaarland.cs.se.selab.model.graph.Graph
 import de.unisaarland.cs.se.selab.model.graph.Path
 import de.unisaarland.cs.se.selab.parser.PrimaryStreetType
