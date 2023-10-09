@@ -1,0 +1,57 @@
+{
+  "events": [
+    {
+      "id": 0,
+      "type": "RUSH_HOUR",
+      "tick": 3,
+      "duration": 2,
+      "roadTypes": ["SIDE_STREET"],
+      "factor": 2
+    },
+    {
+      "id": 1,
+      "type": "TRAFFIC_JAM",
+      "tick": 6,
+      "duration": 1,
+      "source": 1,
+      "target": 3,
+      "factor": 3
+    },
+    {
+      "id": 2,
+      "type": "VACATION",
+      "tick": 10,
+      "duration": 2,
+      "staffID": 34
+    },
+    {
+      "id": 3,
+      "type": "SICKNESS",
+      "tick": 5,
+      "duration": 1,
+      "minTicks": 1
+    }
+  ],
+  "emergencyCalls": [
+    {
+      "id": 0,
+      "tick": 2,
+      "village": "Bonn",
+      "roadName": "Venusstrasse",
+      "emergencyType": "FIRE",
+      "severity": 1,
+      "handleTime": 3,
+      "maxDuration": 6
+    },
+    {
+      "id": 1,
+      "tick": 2,
+      "village": "Berlin",
+      "roadName": "Sternstrasse",
+      "emergencyType": "ACCIDENT",
+      "severity": 2,
+      "handleTime": 7,
+      "maxDuration": 16
+    }
+  ]
+}

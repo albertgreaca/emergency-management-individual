@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "staff": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "name": {
+           "type": "string",
+           "minLength": 3,
+           "maxLength": 10
+        },
+        "baseID": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "ticksHome": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "doubleShift": {
+          "type": "boolean"
+        },
+        "shift": {
+          "enum": [
+            "EARLY",
+            "LATE",
+            "NIGHT",
+          ]
+        },
+        "onCall": {
+          "type": "boolean"
+        },
+        "job": {
+          "enum": [
+            "FIREFIGHTER",
+            "EMT",
+            "EMERGENCY_DOCTOR",
+            "POLICE_OFFICER",
+            "DOG_HANDLER"
+          ]
+        },
+        "drivingLicense": {
+          "enum": [
+            "TRUCK",
+            "MOTORCYCLE",
+            "AMBULANCE",
+            "NONE"
+            ]
+        }
+      },
+      "required": [
+        "id",
+        "baseID",
+        "ticksHome",
+        "doubleShift",
+        "shift",
+        "onCall",
+        "job",
+        "drivingLicense"
+      ],
+      "type": "object"
+    }
+  }
+}
