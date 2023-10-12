@@ -1,24 +1,11 @@
 package de.unisaarland.cs.se.selab.model.assets
 
-import de.unisaarland.cs.se.selab.controller.EmergencyResponse
-import de.unisaarland.cs.se.selab.model.Accident
-import de.unisaarland.cs.se.selab.model.Crime
+import de.unisaarland.cs.se.selab.model.AccidentEmergency
+import de.unisaarland.cs.se.selab.model.CrimeEmergency
 import de.unisaarland.cs.se.selab.model.Emergency
-import de.unisaarland.cs.se.selab.model.Fire
+import de.unisaarland.cs.se.selab.model.FireEmergency
 import de.unisaarland.cs.se.selab.model.MedicalEmergency
 import kotlin.math.max
-
-/**
- * Data Class containing the inquiries for all three emergency types.
- * @param policeInquiry The inquiry for the police.
- * @param ambulanceInquiry The inquiry for the ambulance.
- * @param fireInquiry The inquiry for the fire department.
- */
-data class InquiryTriple(
-    val policeInquiry: AssetInquiry,
-    val ambulanceInquiry: AssetInquiry,
-    val fireInquiry: AssetInquiry
-)
 
 /**
  * class representing the assets required for an emergency.
@@ -162,10 +149,10 @@ fun getNecessaryAssets(emergency: Emergency, assets: List<Vehicle>): AssetInquir
  */
 fun getNecessaryAssets(emergency: Emergency): AssetInquiry {
     return when (emergency) {
-        is Fire -> getNecessaryAssets(emergency)
-        is Crime -> getNecessaryAssets(emergency)
+        is FireEmergency -> getNecessaryAssets(emergency)
+        is CrimeEmergency -> getNecessaryAssets(emergency)
         is MedicalEmergency -> getNecessaryAssets(emergency)
-        is Accident -> getNecessaryAssets(emergency)
+        is AccidentEmergency -> getNecessaryAssets(emergency)
     }
 }
 
@@ -179,7 +166,7 @@ private const val SEVERITY2_LADDER_HEIGHT = 30
 
 private const val SEVERITY3_LADDER_HEIGHT = 40
 
-private fun getNecessaryAssets(fire: Fire): AssetInquiry {
+private fun getNecessaryAssets(fire: FireEmergency): AssetInquiry {
     return when (fire.severity) {
         1 -> AssetInquiry(
             listOf(
@@ -250,7 +237,7 @@ const val SEVERITY2_CRIMINAL = 4
 // 1 Patient
 // 1 Firefighter Transporter
 // 1 Emergency Doctor Car
-private fun getNecessaryAssets(crime: Crime): AssetInquiry {
+private fun getNecessaryAssets(crime: CrimeEmergency): AssetInquiry {
     return when (crime.severity) {
         1 -> AssetInquiry(
             listOf(VehicleType.POLICE_CAR.createDummy(0)),
@@ -364,7 +351,7 @@ private fun getNecessaryAssets(medicalEmergency: MedicalEmergency): AssetInquiry
 // 3 Ambulances
 // 2 Patients
 // 1 Emergency Doctor
-private fun getNecessaryAssets(accident: Accident): AssetInquiry {
+private fun getNecessaryAssets(accident: AccidentEmergency): AssetInquiry {
     return when (accident.severity) {
         1 -> AssetInquiry(
             listOf(VehicleType.FIRE_TRUCK_TECHNICAL.createDummy(0)),
@@ -411,14 +398,3 @@ private fun getNecessaryAssets(accident: Accident): AssetInquiry {
         else -> error("Severity of accident is not in range 1-3")
     }
 }
-
-/**
- * This class represents a request for assets.
- */
-data class AssetRequest(
-    val id: Int,
-    val base: Base<*>,
-    val emergencyResponse: EmergencyResponse,
-    val assetInquiry: AssetInquiry,
-    val checkedBases: List<Int>
-)

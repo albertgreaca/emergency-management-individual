@@ -1,13 +1,5 @@
-package de.unisaarland.cs.se.selab.parser
+package de.unisaarland.cs.se.selab.model.assets
 
-import de.unisaarland.cs.se.selab.model.assets.Ambulance
-import de.unisaarland.cs.se.selab.model.assets.Base
-import de.unisaarland.cs.se.selab.model.assets.FireStation
-import de.unisaarland.cs.se.selab.model.assets.FireTruck
-import de.unisaarland.cs.se.selab.model.assets.Hospital
-import de.unisaarland.cs.se.selab.model.assets.PoliceStation
-import de.unisaarland.cs.se.selab.model.assets.PoliceVehicle
-import de.unisaarland.cs.se.selab.model.assets.Vehicle
 import de.unisaarland.cs.se.selab.model.map.Node
 import de.unisaarland.cs.se.selab.parser.config.JsonKeys
 import de.unisaarland.cs.se.selab.util.Result

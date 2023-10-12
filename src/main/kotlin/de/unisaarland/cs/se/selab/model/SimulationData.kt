@@ -41,30 +41,3 @@ data class SimulationData(
         return currentRequestId
     }
 }
-
-/**
- * Builder for the [SimulationData].
- */
-class WorldDataBuilder {
-    lateinit var simulationMap: Graph<Node, Road>
-    lateinit var bases: List<Base<*>>
-    lateinit var vehicles: List<Vehicle>
-    var maxTicks: Int = 0
-    val simulationData: SimulationData
-        get() = SimulationData(
-            simulationMap,
-            bases.filterIsInstance<Hospital>(),
-            bases.filterIsInstance<PoliceStation>(),
-            bases.filterIsInstance<FireStation>(),
-            vehicles,
-            maxTicks
-        )
-}
-
-/**
- * Data class for the scenario data.
- */
-data class ScenarioData(
-    val emergencies: Collection<Emergency>,
-    val events: Collection<Event>
-)

@@ -1,11 +1,11 @@
 package de.unisaarland.cs.se.selab.controller
 
 import de.unisaarland.cs.se.selab.logger.Logger
-import de.unisaarland.cs.se.selab.model.Accident
-import de.unisaarland.cs.se.selab.model.Crime
+import de.unisaarland.cs.se.selab.model.AccidentEmergency
+import de.unisaarland.cs.se.selab.model.CrimeEmergency
 import de.unisaarland.cs.se.selab.model.Emergency
 import de.unisaarland.cs.se.selab.model.Event
-import de.unisaarland.cs.se.selab.model.Fire
+import de.unisaarland.cs.se.selab.model.FireEmergency
 import de.unisaarland.cs.se.selab.model.MedicalEmergency
 import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.assets.AssetRequest
@@ -76,9 +76,9 @@ class Simulation(
         newEmergencies.forEach { it.road.pauseEvent() }
         for (emergency in newEmergencies) {
             val closestBase = when (emergency) {
-                is Fire -> navigation.closestFireStation(emergency.road)
-                is Accident -> navigation.closestFireStation(emergency.road)
-                is Crime -> navigation.closestPoliceStation(emergency.road)
+                is FireEmergency -> navigation.closestFireStation(emergency.road)
+                is AccidentEmergency -> navigation.closestFireStation(emergency.road)
+                is CrimeEmergency -> navigation.closestPoliceStation(emergency.road)
                 is MedicalEmergency -> navigation.closestHospital(emergency.road)
             }.getOrThrow(IllegalStateException("No base found"))
             activeEmergencies.add(

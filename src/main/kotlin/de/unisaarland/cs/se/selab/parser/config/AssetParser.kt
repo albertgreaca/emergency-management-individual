@@ -1,6 +1,7 @@
 package de.unisaarland.cs.se.selab.parser.config
 
 import de.unisaarland.cs.se.selab.model.assets.Base
+import de.unisaarland.cs.se.selab.model.assets.BaseType
 import de.unisaarland.cs.se.selab.model.assets.FireStation
 import de.unisaarland.cs.se.selab.model.assets.Hospital
 import de.unisaarland.cs.se.selab.model.assets.PoliceStation
@@ -9,7 +10,6 @@ import de.unisaarland.cs.se.selab.model.assets.VehicleType
 import de.unisaarland.cs.se.selab.model.graph.Graph
 import de.unisaarland.cs.se.selab.model.map.Node
 import de.unisaarland.cs.se.selab.model.map.Road
-import de.unisaarland.cs.se.selab.parser.BaseType
 import de.unisaarland.cs.se.selab.util.Result
 import de.unisaarland.cs.se.selab.util.getSchema
 import de.unisaarland.cs.se.selab.util.ifSuccess
