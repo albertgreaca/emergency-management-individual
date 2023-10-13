@@ -106,7 +106,7 @@ enum class EventType(private val specificKeys: Set<String>) {
     VACATION(setOf(JsonKeys.STAFF_ID)) {
         override fun fromJson(event: JSONObject, simulationData: SimulationData): Result<Event> {
             if (simulationData.staff.none { it.id == event.getInt(JsonKeys.STAFF_ID) }) {
-                return Result.failure("Staff with id ${event.getInt(JsonKeys.STAFF_ID)}")
+                return Result.failure("Staff with id ${event.getInt(JsonKeys.STAFF_ID)} does not exist")
             }
             return Result.success(
                 VacationEvent(
@@ -120,6 +120,9 @@ enum class EventType(private val specificKeys: Set<String>) {
     },
     SICKNESS(setOf(JsonKeys.MINTICKS)) {
         override fun fromJson(event: JSONObject, simulationData: SimulationData): Result<Event> {
+            if (event.getInt(JsonKeys.MINTICKS) >= event.getInt(JsonKeys.TICK)) {
+                return Result.failure("Minticks larger than tick")
+            }
             return Result.success(
                 SicknessEvent(
                     event.getInt(JsonKeys.TICK),

@@ -25,13 +25,13 @@ class ExampleTest : SystemTest() {
         // The Simulation should end
         assertNextLine("Simulation End")
         // Statistics
-        assertNextLine("Simulation Statistics: 0 assets rerouted.")
-        assertNextLine("Simulation Statistics: 0 received emergencies.")
-        assertNextLine("Simulation Statistics: 0 ongoing emergencies.")
-        assertNextLine("Simulation Statistics: 0 failed emergencies.")
-        assertNextLine("Simulation Statistics: 0 resolved emergencies.")
+        assertNextLine("Simulation Statistics: 0 assets rerouted")
+        assertNextLine("Simulation Statistics: 0 received emergencies")
+        assertNextLine("Simulation Statistics: 0 ongoing emergencies")
+        assertNextLine("Simulation Statistics: 0 failed emergencies")
+        assertNextLine("Simulation Statistics: 0 resolved emergencies")
         assertNextLine("Simulation Statistics: 0 shifts worked")
-        assertNextLine("Simulation Statistics: 0 ticks worked ")
+        assertNextLine("Simulation Statistics: 0 ticks worked")
         // end of file is reached
         assertEnd()
     }
