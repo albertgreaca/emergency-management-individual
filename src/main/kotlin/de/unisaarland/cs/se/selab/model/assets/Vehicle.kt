@@ -32,6 +32,9 @@ interface Vehicle {
     var currentRoute: Route
     var inMaintenance: Boolean
     var manning: Boolean
+    var assignedStaff: List<Staff>
+    val needsLicense: Boolean
+
     val target: Location
         get() = currentEmergency?.road ?: home
 

@@ -10,8 +10,9 @@ data class PoliceStation(
     override val location: Node,
     override var staffNumber: Int,
     private var dogNumber: Int,
-    val cars: List<PoliceVehicle>
-) : Base<PoliceVehicle>(cars) {
+    val cars: List<PoliceVehicle>,
+    val policeStaff: List<Staff>
+) : Base<PoliceVehicle>(cars, policeStaff) {
     override fun canMan(vehicle: Vehicle): Boolean {
         return super.canMan(vehicle) &&
             vehicle is PoliceVehicle && (vehicle.vehicleType != VehicleType.K9_POLICE_CAR || this.dogNumber > 0)

@@ -4,6 +4,7 @@ import de.unisaarland.cs.se.selab.model.assets.Base
 import de.unisaarland.cs.se.selab.model.assets.FireStation
 import de.unisaarland.cs.se.selab.model.assets.Hospital
 import de.unisaarland.cs.se.selab.model.assets.PoliceStation
+import de.unisaarland.cs.se.selab.model.assets.Staff
 import de.unisaarland.cs.se.selab.model.assets.Vehicle
 import de.unisaarland.cs.se.selab.model.graph.Graph
 import de.unisaarland.cs.se.selab.model.map.Node
@@ -18,6 +19,7 @@ data class SimulationData(
     val policeStations: List<PoliceStation>,
     val fireStations: List<FireStation>,
     val vehicles: List<Vehicle>,
+    val staff: List<Staff>,
     val maxTicks: Int,
     var tick: Int = 0,
 ) {

@@ -10,4 +10,5 @@ data class FireStation(
     override val location: Node,
     override var staffNumber: Int,
     val trucks: List<FireTruck>,
-) : Base<FireTruck>(trucks)
+    val fireStaff: List<Staff>
+) : Base<FireTruck>(trucks, fireStaff)

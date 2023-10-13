@@ -5,6 +5,8 @@ import de.unisaarland.cs.se.selab.model.assets.BaseType
 import de.unisaarland.cs.se.selab.model.assets.FireStation
 import de.unisaarland.cs.se.selab.model.assets.Hospital
 import de.unisaarland.cs.se.selab.model.assets.PoliceStation
+import de.unisaarland.cs.se.selab.model.assets.Staff
+import de.unisaarland.cs.se.selab.model.assets.StaffType
 import de.unisaarland.cs.se.selab.model.assets.Vehicle
 import de.unisaarland.cs.se.selab.model.assets.VehicleType
 import de.unisaarland.cs.se.selab.model.graph.Graph
@@ -23,6 +25,7 @@ import org.json.JSONObject
 class AssetParser(val map: Graph<Node, Road>) {
 
     val vehicles = HashMap<Int, Vehicle>()
+    val staff = HashMap<Int, Staff>()
     private val baseMap = HashMap<Int, Base<*>>()
     private val fireStations: List<FireStation>
         get() = baseMap.values.filterIsInstance<FireStation>()
@@ -34,7 +37,7 @@ class AssetParser(val map: Graph<Node, Road>) {
     /**
      * Parses assets from a JSONString
      */
-    fun parseAssets(jsonString: String): Result<Pair<List<Vehicle>, List<Base<*>>>> {
+    fun parseAssets(jsonString: String): Result<Triple<List<Vehicle>, List<Staff>, List<Base<*>>>> {
         val schema = getSchema(this.javaClass, "assets.schema") ?: error("Could not load assets schema")
 
         val json = JSONObject(jsonString)
@@ -45,12 +48,20 @@ class AssetParser(val map: Graph<Node, Road>) {
         }
         val bases = json.getJSONArray(JsonKeys.BASES)
         val jsonVehicles = json.getJSONArray(JsonKeys.VEHICLES)
+        val jsonStaff = json.getJSONArray(JsonKeys.STAFF)
         var assetsValid = Result.success(Unit)
         for (vehicle in jsonVehicles) {
             if (vehicle is JSONObject) {
                 assetsValid = assetsValid.ifSuccessFlat { parseVehicle(vehicle) }
             } else {
                 return Result.failure("Vehicle is not a JSONObject")
+            }
+        }
+        for (staff in jsonStaff) {
+            if (staff is JSONObject) {
+                assetsValid = assetsValid.ifSuccessFlat { parseStaff(staff) }
+            } else {
+                return Result.failure("Staff is not a JSONObject")
             }
         }
 
@@ -63,7 +74,7 @@ class AssetParser(val map: Graph<Node, Road>) {
         }
         return assetsValid
             .ifSuccessFlat { validateAssets() }
-            .ifSuccess { Pair(vehicles.values.toList(), baseMap.values.toList()) }
+            .ifSuccess { Triple(vehicles.values.toList(), staff.values.toList(), baseMap.values.toList()) }
     }
 
     private fun validateAssets(): Result<Unit> {
@@ -79,7 +90,15 @@ class AssetParser(val map: Graph<Node, Road>) {
                     if (result) {
                         Result.success(Unit)
                     } else {
-                        Result.failure("Not all base types are present")
+                        Result.failure("Not all base IDs for vehicles are present")
+                    }
+                }
+            }.ifSuccessFlat {
+                staff.values.all { base -> base.baseID in baseMap.keys }.let { result ->
+                    if (result) {
+                        Result.success(Unit)
+                    } else {
+                        Result.failure("Not all base IDs for staff are present")
                     }
                 }
             }
@@ -124,7 +143,7 @@ class AssetParser(val map: Graph<Node, Road>) {
         if (baseMap.contains(id)) {
             return Result.failure("Base $id is already defined")
         }
-        return BaseType.create(base, vehicles.values).ifSuccess { baseMap[id] = it }
+        return BaseType.create(base, vehicles.values, staff.values).ifSuccess { baseMap[id] = it }
     }
 
     private fun parseVehicle(vehicle: JSONObject): Result<Unit> {
@@ -133,5 +152,13 @@ class AssetParser(val map: Graph<Node, Road>) {
             return Result.failure("Vehicle $id is already defined")
         }
         return VehicleType.createFromJson(vehicle).ifSuccess { vehicles[it.id] = it }
+    }
+
+    private fun parseStaff(staffMember: JSONObject): Result<Unit> {
+        val id = staffMember.getInt(JsonKeys.ID)
+        if (staff.contains(id)) {
+            return Result.failure("Staff member $id is already defined")
+        }
+        return StaffType.createFromJson(staffMember).ifSuccess { staff[it.id] = it }
     }
 }

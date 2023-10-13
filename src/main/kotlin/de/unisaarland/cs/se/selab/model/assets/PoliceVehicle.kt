@@ -18,7 +18,9 @@ data class PoliceVehicle(
     override var broken: Boolean = false,
     override var inMaintenance: Boolean = false,
     override var manning: Boolean = false,
-    override var atTarget: Boolean = true
+    override var atTarget: Boolean = true,
+    override var assignedStaff: List<Staff> = emptyList(),
+    override var needsLicense: Boolean
 ) : Vehicle {
     override val ready: Boolean
         get() = vehicleType != VehicleType.POLICE_CAR ||

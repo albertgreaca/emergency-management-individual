@@ -6,7 +6,7 @@ import de.unisaarland.cs.se.selab.model.map.Node
 /**
  * Superclass for the bases.
  */
-sealed class Base<T : Vehicle>(val vehicles: List<T>) {
+sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     abstract val id: Int
     abstract val location: Node
     abstract var staffNumber: Int
@@ -42,6 +42,9 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>) {
      * Check if the vehicle can be manned by this base.
      */
     open fun canMan(vehicle: Vehicle): Boolean {
+        if (vehicle.needsLicense) {
+            return vehicle.staffCapacity <= this.staffNumber && staff.any { it.hasLicense }
+        }
         return vehicle.staffCapacity <= this.staffNumber
     }
 

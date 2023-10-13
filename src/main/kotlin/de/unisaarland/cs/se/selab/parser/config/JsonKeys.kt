@@ -36,6 +36,16 @@ object JsonKeys {
     const val EMERGENCY_TYPE = "emergencyType"
     const val HANDLE_TIME = "handleTime"
     const val MAX_DURATION = "maxDuration"
+    const val NAME = "name"
+    const val TICKS_HOME = "ticksHome"
+    const val DOUBLE_SHIFT = "doubleShift"
+    const val SHIFT = "shift"
+    const val ON_CALL = "onCall"
+    const val JOB = "job"
+    const val DRIVING_LICENSE = "drivingLicense"
+    const val TRUCK = "TRUCK"
+    const val MOTORCYCLE = "MOTORCYCLE"
+    const val AMBULANCE = "AMBULANCE"
 }
 
 /**

@@ -11,7 +11,8 @@ data class Hospital(
     override var staffNumber: Int,
     var doctorNumber: Int,
     val ambulances: List<Ambulance>,
-) : Base<Ambulance>(ambulances) {
+    val hospitalStaff: List<Staff>
+) : Base<Ambulance>(ambulances, hospitalStaff) {
     override fun canMan(vehicle: Vehicle): Boolean {
         return super.canMan(vehicle) &&
             vehicle is Ambulance && (vehicle.vehicleType != VehicleType.EMERGENCY_DOCTOR_CAR || this.doctorNumber > 0)

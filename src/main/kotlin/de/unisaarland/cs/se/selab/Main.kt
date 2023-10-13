@@ -83,7 +83,8 @@ private fun runSimulation(
             }
         }.ifSuccessFlat { assets ->
             // Parse Scenario
-            simulationBuilder.bases = assets.second
+            simulationBuilder.bases = assets.third
+            simulationBuilder.staff = assets.second
             simulationBuilder.vehicles = assets.first
             logger.initialization(scenario) { scenario ->
                 ScenarioParser(simulationBuilder.simulationData).parse(scenario)

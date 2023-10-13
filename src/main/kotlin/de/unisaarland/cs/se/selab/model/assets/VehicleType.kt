@@ -17,7 +17,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     this,
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     json.getInt(JsonKeys.CRIMINAL_CAPACITY),
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = false
                 )
             )
         }
@@ -29,7 +30,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 this,
                 0,
                 parameter,
-                0
+                0,
+                needsLicense = false
             )
         }
     },
@@ -42,7 +44,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     this,
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     0,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = false
                 )
             )
         }
@@ -54,7 +57,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 this,
                 0,
                 0,
-                0
+                0,
+                needsLicense = false
             )
         }
     },
@@ -67,7 +71,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     this,
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     0,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = true
                 )
             )
         }
@@ -79,7 +84,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 this,
                 0,
                 0,
-                0
+                0,
+                needsLicense = true
             )
         }
     },
@@ -93,7 +99,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     json.getInt(JsonKeys.WATER_CAPACITY),
                     0,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = true
                 )
             )
         }
@@ -106,7 +113,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 0,
                 0,
                 0,
-                0
+                0,
+                needsLicense = true
             )
         }
     },
@@ -120,7 +128,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     0,
                     0,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = true
                 )
             )
         }
@@ -133,7 +142,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 0,
                 0,
                 0,
-                0
+                0,
+                needsLicense = true
             )
         }
     },
@@ -147,7 +157,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     0,
                     json.getInt(JsonKeys.LADDER_LENGTH),
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = true
                 )
             )
         }
@@ -160,7 +171,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 0,
                 0,
                 parameter,
-                0
+                0,
+                needsLicense = true
             )
         }
     },
@@ -174,7 +186,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     0,
                     0,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = false
                 )
             )
         }
@@ -187,7 +200,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 0,
                 0,
                 0,
-                0
+                0,
+                needsLicense = false
             )
         }
     },
@@ -200,7 +214,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     this,
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     1,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = true
                 )
             )
         }
@@ -212,7 +227,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 this,
                 0,
                 1,
-                0
+                0,
+                needsLicense = true
             )
         }
     },
@@ -225,7 +241,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                     this,
                     json.getInt(JsonKeys.STAFF_CAPACITY),
                     0,
-                    json.getInt(JsonKeys.VEHICLE_HEIGHT)
+                    json.getInt(JsonKeys.VEHICLE_HEIGHT),
+                    needsLicense = false
                 )
             )
         }
@@ -237,7 +254,8 @@ enum class VehicleType(private val specificKeys: Set<String>) {
                 this,
                 0,
                 0,
-                0
+                0,
+                needsLicense = false
             )
         }
     };
