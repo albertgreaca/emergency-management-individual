@@ -46,6 +46,8 @@ object JsonKeys {
     const val TRUCK = "TRUCK"
     const val MOTORCYCLE = "MOTORCYCLE"
     const val AMBULANCE = "AMBULANCE"
+    const val STAFF_ID = "staffID"
+    const val MINTICKS = "minTicks"
 }
 
 /**

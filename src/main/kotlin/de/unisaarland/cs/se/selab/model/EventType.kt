@@ -102,7 +102,35 @@ enum class EventType(private val specificKeys: Set<String>) {
                 )
             )
         }
-    };
+    },
+    VACATION(setOf(JsonKeys.STAFF_ID)) {
+        override fun fromJson(event: JSONObject, simulationData: SimulationData): Result<Event> {
+            if (simulationData.staff.none { it.id == event.getInt(JsonKeys.STAFF_ID) }) {
+                return Result.failure("Staff with id ${event.getInt(JsonKeys.STAFF_ID)}")
+            }
+            return Result.success(
+                VacationEvent(
+                    event.getInt(JsonKeys.TICK),
+                    event.getInt(JsonKeys.DURATION),
+                    event.getInt(JsonKeys.STAFF_ID),
+                    event.getInt(JsonKeys.ID)
+                )
+            )
+        }
+    },
+    SICKNESS(setOf(JsonKeys.MINTICKS)) {
+        override fun fromJson(event: JSONObject, simulationData: SimulationData): Result<Event> {
+            return Result.success(
+                SicknessEvent(
+                    event.getInt(JsonKeys.TICK),
+                    event.getInt(JsonKeys.DURATION),
+                    event.getInt(JsonKeys.MINTICKS),
+                    event.getInt(JsonKeys.ID)
+                )
+            )
+        }
+    }
+    ;
 
     /**
      * This function creates the event from a json object.
