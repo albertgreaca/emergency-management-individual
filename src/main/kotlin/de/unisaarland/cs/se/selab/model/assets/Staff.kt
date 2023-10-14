@@ -22,4 +22,29 @@ data class Staff(
     var goingHome: Boolean = false,
     var atHome: Boolean = false,
     var returningToBase: Boolean = false
-)
+) {
+
+    /**
+     * check if the staff can be assigned at all
+     */
+    fun canBeAssigned(): Boolean {
+        // TODO events
+        return (currentShift.working || currentShift.onCall) && allocatedTo == null
+    }
+
+    /**
+     * check if the staff can be assigned and is working this shift
+     */
+    fun canBeAssignedWorking(): Boolean {
+        // TODO events
+        return currentShift.working && allocatedTo == null
+    }
+
+    /**
+     * check if the staff can be assigned and is on call
+     */
+    fun canBeAssignedOnCall(): Boolean {
+        // TODO events
+        return currentShift.onCall && allocatedTo == null
+    }
+}

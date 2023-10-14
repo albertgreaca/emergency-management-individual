@@ -28,8 +28,11 @@ class BaseController<T : Vehicle>(
      *
      * @return The requests for the remaining assets.
      */
-    fun assignAssets(emergencyResponse: EmergencyResponse, logger: Logger, simulationData: SimulationData):
-        List<AssetRequest> {
+    fun assignAssets(
+        emergencyResponse: EmergencyResponse,
+        logger: Logger,
+        simulationData: SimulationData
+    ): List<AssetRequest> {
         val assetInquiry =
             getNecessaryAssets(emergencyResponse.emergency, emergencyResponse.allocatedAssets(simulationData))
         val potentialVehicles = base.availableVehicles.filter { vehicle ->
@@ -81,17 +84,17 @@ class BaseController<T : Vehicle>(
         val requests = mutableListOf<Triple<Base<*>, EmergencyResponse, AssetInquiry>>()
         if (!remainingInquiries.ambulanceInquiry.isFulfilled) {
             navigation.closestHospital(base.location, checkedBases + base.id, true).ifSuccess {
-                requests.add(Triple(it, emergency, remainingInquiries.ambulanceInquiry))
+                requests.add(Triple(it.first, emergency, remainingInquiries.ambulanceInquiry))
             }
         }
         if (!remainingInquiries.fireInquiry.isFulfilled) {
             navigation.closestFireStation(base.location, checkedBases + base.id, true).ifSuccess {
-                requests.add(Triple(it, emergency, remainingInquiries.fireInquiry))
+                requests.add(Triple(it.first, emergency, remainingInquiries.fireInquiry))
             }
         }
         if (!remainingInquiries.policeInquiry.isFulfilled) {
             navigation.closestPoliceStation(base.location, checkedBases + base.id, true).ifSuccess {
-                requests.add(Triple(it, emergency, remainingInquiries.policeInquiry))
+                requests.add(Triple(it.first, emergency, remainingInquiries.policeInquiry))
             }
         }
         return requests.sortedBy { it.first.id }.map { requestTriple ->
@@ -128,21 +131,23 @@ class BaseController<T : Vehicle>(
                     ) / SPEED.toDouble()
             ) <= emergencyResponse.maxTravelTime
         }
-        val taskForce = taskForce(assetInquiry, potentialVehicles)
-        if (taskForce.isNotEmpty()) {
-            for (vehicle in taskForce.sortedBy { it.id }) {
+        val allocatedVehicles: MutableList<T> = mutableListOf()
+        // TODO determine allocated vehicles
+        for (vehicle in potentialVehicles.sortedBy { it.id }) {
+            if (base.canManSimulation(vehicle)) {
                 vehicle.currentEmergency = emergencyResponse.emergency
                 vehicle.currentRoute = potentialRoutes[vehicle.vehicleHeight]?.move(0)
                     ?: error("A route from the base to the emergency needs to exist")
                 vehicle.location = vehicle.currentRoute.start
                 vehicle.atTarget = false
                 vehicle.manning = true
-                base.checkSpecialStaff(vehicle)
+                base.allocateStaff(emergencyResponse, logger, vehicle)
                 base.staffNumber -= vehicle.staffCapacity
                 logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, vehicle.timeToTarget))
+                allocatedVehicles.add(vehicle)
             }
         }
-        return assetInquiry.remainingAssets(taskForce)
+        return assetInquiry.remainingAssets(allocatedVehicles)
     }
 
     /**

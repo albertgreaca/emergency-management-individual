@@ -58,11 +58,14 @@ class Simulation(
         while (simulationData.tick < simulationData.maxTicks && emergencies.any { !it.done }) {
             tick()
             simulationData.tick++
+            if (simulationData.tick % shiftLength == 0) {
+                simulationData.shift = simulationData.shift.getNext()
+            }
         }
     }
 
     private fun tick() {
-        logger.tick(simulationData.tick)
+        logger.tick(simulationData.tick, simulationData.shift)
         emergencyPhase()
         planningPhase()
         updatePhase()
@@ -84,10 +87,10 @@ class Simulation(
             activeEmergencies.add(
                 EmergencyResponse(
                     emergency,
-                    baseController[closestBase.id] ?: BaseController(closestBase, navigation)
+                    baseController[closestBase.first.id] ?: BaseController(closestBase.first, navigation)
                 )
             )
-            logger.emergency(emergency.id, closestBase.id)
+            logger.emergency(emergency.id, closestBase.first.id, closestBase.second)
         }
     }
 
@@ -141,14 +144,13 @@ class Simulation(
                 ?: error("Route should exist")
             if (potentialNewRoute != it.currentRoute.move(0)) {
                 it.currentRoute = paths[Triple(it.location, it.target, it.vehicleHeight)] ?: error("Route should exist")
-                logger.assetRerouted()
+                logger.assetRerouted(it.id, it.currentRoute.path)
                 KotlinLogging.logger("Asset Rerouting").info {
                     "In tick ${simulationData.tick} asset ${it.id} " +
                         "was rerouted new time to target ${it.target}: ${it.timeToTarget}"
                 }
             }
         }
-        logger.logRerouting()
     }
 
     /**
@@ -177,5 +179,8 @@ class Simulation(
         if (recalculateRoutes) {
             reRouteAssets()
         }
+    }
+    companion object {
+        const val shiftLength = 10
     }
 }

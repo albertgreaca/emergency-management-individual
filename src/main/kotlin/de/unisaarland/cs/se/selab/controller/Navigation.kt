@@ -73,7 +73,7 @@ class Navigation(private val simulationData: SimulationData) {
      * @return The closest FireStation to the given [Location] or a [Result.failure] if no FireStation is available.
      */
     fun closestFireStation(address: Location, excludeBases: List<Int> = emptyList(), reverse: Boolean = false):
-        Result<FireStation> {
+        Result<Pair<FireStation, Path<Node, Road>>> {
         return findClosestBase(
             address,
             simulationData.fireStations.filter { excludeBases.contains(it.id).not() },
@@ -90,7 +90,7 @@ class Navigation(private val simulationData: SimulationData) {
      * @return The closest PoliceStation to the given [Location] or a [Result.failure] if no PoliceStation is available.
      */
     fun closestPoliceStation(address: Location, excludeBases: List<Int> = emptyList(), reverse: Boolean = false):
-        Result<PoliceStation> {
+        Result<Pair<PoliceStation, Path<Node, Road>>> {
         return findClosestBase(
             address,
             simulationData.policeStations.filter { excludeBases.contains(it.id).not() },
@@ -107,7 +107,7 @@ class Navigation(private val simulationData: SimulationData) {
      * @return The closest Hospital to the given [Location] or a [Result.failure] if no Hospital is available.
      */
     fun closestHospital(address: Location, excludeBases: List<Int> = emptyList(), reverse: Boolean = false):
-        Result<Hospital> {
+        Result<Pair<Hospital, Path<Node, Road>>> {
         return findClosestBase(address, simulationData.hospitals.filter { excludeBases.contains(it.id).not() }, reverse)
     }
 
@@ -119,18 +119,25 @@ class Navigation(private val simulationData: SimulationData) {
      *
      * @return The closest Base to the given [Location] or a [Result.failure] if no Base is available.
      */
-    private fun <T : Base<*>> findClosestBase(address: Location, bases: List<T>, reverse: Boolean): Result<T> {
+    private fun <T : Base<*>> findClosestBase(
+        address: Location,
+        bases: List<T>,
+        reverse: Boolean
+    ): Result<Pair<T, Path<Node, Road>>> {
         if (bases.isEmpty()) return Result.failure("No bases available")
         if (reverse && address is Node) {
             val shortestPath = shortestRoute(address, bases.map { it.location }.toSet())
             return Success(
-                bases.find { it.location == shortestPath.vertices.last() } ?: error("Closest base not found")
+                Pair(
+                    bases.find { it.location == shortestPath.vertices.last() } ?: error("Closest base not found"),
+                    shortestPath
+                )
             )
         }
-        val paths = bases.map { Pair(it, shortestRoute(it.location, address).length) }
-        val shortest = paths.minOf { it.second }
-        val closest = paths.filter { it.second == shortest }.minByOrNull { it.first.id }
+        val paths = bases.map { Pair(it, shortestRoute(it.location, address)) }
+        val shortest = paths.minOf { it.second.length }
+        val closest = paths.filter { it.second.length == shortest }.minByOrNull { it.first.id }
             ?: error("Closest base not found")
-        return Success(closest.first)
+        return Success(Pair(closest.first, closest.second.path))
     }
 }

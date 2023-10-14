@@ -21,4 +21,8 @@ enum class ShiftType {
         }
         return EARLY
     }
+
+    override fun toString(): String {
+        return super.toString().lowercase()
+    }
 }

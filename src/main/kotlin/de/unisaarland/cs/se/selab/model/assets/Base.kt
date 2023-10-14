@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model.assets
 
+import de.unisaarland.cs.se.selab.controller.EmergencyResponse
+import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.Emergency
 import de.unisaarland.cs.se.selab.model.map.Node
 
@@ -39,13 +41,30 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     }
 
     /**
-     * Check if the vehicle can be manned by this base.
+     * Check if the vehicle can be manned by this base during parsing.
      */
     open fun canMan(vehicle: Vehicle): Boolean {
         if (vehicle.needsLicense) {
             return vehicle.staffCapacity <= this.staffNumber && staff.any { it.hasLicense }
         }
         return vehicle.staffCapacity <= this.staffNumber
+    }
+
+    /**
+     * Check if the vehicle can be manned by this base during simulation.
+     */
+    open fun canManSimulation(vehicle: Vehicle): Boolean {
+        var ans: Boolean = vehicle.staffCapacity <= this.staff.count { it.canBeAssigned() }
+        if (vehicle.needsLicense) {
+            ans = ans && staff.any { it.canBeAssigned() && it.hasLicense }
+        }
+        if (vehicle.vehicleType == VehicleType.K9_POLICE_CAR) {
+            ans = ans && staff.any { it.canBeAssigned() && it.staffType == StaffType.DOG_HANDLER }
+        }
+        if (vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR) {
+            ans = ans && staff.any { it.canBeAssigned() && it.staffType == StaffType.EMERGENCY_DOCTOR }
+        }
+        return ans
     }
 
     /**
@@ -58,9 +77,9 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * Check if the base has enough special staff and reduce the number of special staff if necessary.
      */
-    open fun checkSpecialStaff(vehicle: T) {
+    open fun allocateStaff(emergencyResponse: EmergencyResponse, logger: Logger, vehicle: T): Int {
         // Do nothing by default
-        Unit
+        return 0
     }
 
     /**
@@ -68,5 +87,8 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
      */
     open fun returnVehicle(vehicle: Vehicle) {
         staffNumber += vehicle.staffCapacity
+        for (staff in vehicle.assignedStaff) {
+            staff.allocatedTo = null
+        }
     }
 }

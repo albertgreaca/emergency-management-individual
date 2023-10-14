@@ -21,7 +21,7 @@ class ExampleTest : SystemTest() {
         assertNextLine("Initialization Info: example_scenario.json successfully parsed and validated")
         // The Simulation starts with tick 0
         assertNextLine("Simulation starts")
-        assertNextLine("Simulation Tick: 0 EARLY shift")
+        assertNextLine("Simulation Tick: 0 early shift")
         // The Simulation should end
         assertNextLine("Simulation End")
         // Statistics
