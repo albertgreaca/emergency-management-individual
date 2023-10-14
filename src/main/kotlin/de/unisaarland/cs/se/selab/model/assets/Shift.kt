@@ -29,7 +29,10 @@ data class Shift(
             if (json.getBoolean(JsonKeys.DOUBLE_SHIFT)) {
                 return Shift(ShiftType.valueOf(json.getString(JsonKeys.SHIFT)).getNext(), true, false)
             }
-            return Shift(ShiftType.valueOf(json.getString(JsonKeys.SHIFT)).getNext(), false, true)
+            if (json.getBoolean(JsonKeys.ON_CALL)) {
+                return Shift(ShiftType.valueOf(json.getString(JsonKeys.SHIFT)).getNext(), false, true)
+            }
+            return Shift(ShiftType.valueOf(json.getString(JsonKeys.SHIFT)).getNext(), false, false)
         }
     }
 }
