@@ -72,7 +72,7 @@ data class Staff(
         val shiftEnd = hasShift && nextDifferent
         if (shiftEnd) {
             logger.shiftEnd(name, id, currentShift.type)
-            logger.shiftEnd(name, id, nextShift.type)
+            logger.shiftStart(name, id, nextShift.type)
             if (nextShift.onCall) {
                 logger.staffOnCall(name, id)
             }
