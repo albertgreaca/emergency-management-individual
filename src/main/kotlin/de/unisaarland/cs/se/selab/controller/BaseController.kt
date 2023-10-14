@@ -40,7 +40,7 @@ class BaseController<T : Vehicle>(
         }
         var sendRequests = true
         if (potentialVehicles.isNotEmpty()) {
-            val newAssetInquiry = handleInquiry(emergencyResponse, logger, potentialVehicles, assetInquiry)
+            val newAssetInquiry = handleInquiry(emergencyResponse, logger, potentialVehicles, assetInquiry, false)
             if (assetInquiry == newAssetInquiry && emergencyResponse.allocatedAssets(simulationData).isEmpty()) {
                 sendRequests = false
             }
@@ -119,9 +119,11 @@ class BaseController<T : Vehicle>(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicles: List<T>,
-        assetInquiry: AssetInquiry
+        assetInquiry2: AssetInquiry,
+        request: Boolean
     ): AssetInquiry {
         var potentialVehicles = vehicles
+        var assetInquiry = assetInquiry2
         val potentialRoutes = routes(potentialVehicles, emergencyResponse)[base.location].orEmpty()
         potentialVehicles = potentialVehicles.filter {
             ceil(
@@ -132,22 +134,26 @@ class BaseController<T : Vehicle>(
             ) <= emergencyResponse.maxTravelTime
         }
         val allocatedVehicles: MutableList<T> = mutableListOf()
-        // TODO determine allocated vehicles
         for (vehicle in potentialVehicles.sortedBy { it.id }) {
-            if (base.canManSimulation(vehicle)) {
+            if (
+                assetInquiry.isFulfillable(vehicle) &&
+                assetInquiry.canHelp(vehicle) &&
+                base.canManSimulationBool(vehicle, request)
+            ) {
                 vehicle.currentEmergency = emergencyResponse.emergency
                 vehicle.currentRoute = potentialRoutes[vehicle.vehicleHeight]?.move(0)
                     ?: error("A route from the base to the emergency needs to exist")
                 vehicle.location = vehicle.currentRoute.start
                 vehicle.atTarget = false
                 vehicle.manning = true
-                base.allocateStaff(emergencyResponse, logger, vehicle)
+                val extra = base.allocateStaff(emergencyResponse, logger, vehicle)
                 base.staffNumber -= vehicle.staffCapacity
-                logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, vehicle.timeToTarget))
+                logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, extra + vehicle.timeToTarget))
                 allocatedVehicles.add(vehicle)
+                assetInquiry = assetInquiry.remainingAssets(listOf(vehicle))
             }
         }
-        return assetInquiry.remainingAssets(allocatedVehicles)
+        return assetInquiry
     }
 
     /**
@@ -219,75 +225,6 @@ class BaseController<T : Vehicle>(
             }
     }
 
-    private fun combinationRec(
-        input: List<T>,
-        inputLength: Int,
-        resultLength: Int,
-        index: Int,
-        temp: MutableList<T>,
-        i: Int,
-        neededAssets: AssetInquiry,
-        resList: List<T> = emptyList()
-    ): List<T> {
-        // if we are done with this part or already found a combination, return
-        if (index == resultLength || resList.isNotEmpty() || i >= inputLength) {
-            if (resList.isEmpty() && temp.size == resultLength) {
-                // check if we can support this combination with staff
-                return temp.toList()
-            }
-            return resList
-        }
-
-        // add the vehicle only if it is needed
-        var potentialResult = emptyList<T>()
-        if (neededAssets.canHelp(input[i]) &&
-            neededAssets.isFulfillable(input[i]) &&
-            base.canMan(temp + input[i])
-        ) {
-            val tempCopy = temp.toMutableList()
-            tempCopy.add(input[i])
-            potentialResult = combinationRec(
-                input,
-                inputLength,
-                resultLength,
-                index + 1,
-                tempCopy,
-                i + 1,
-                neededAssets.remainingAssets(listOf(input[i]))
-            )
-        }
-        if (potentialResult.isNotEmpty()) {
-            return potentialResult
-        }
-        return combinationRec(input, inputLength, resultLength, index, temp, i + 1, neededAssets)
-    }
-
-    /**
-     * Build the largest task force for a given inquiry the base can man.
-     * @param assetInquiry The inquiry to build the task force for.
-     * @param potentialVehicles The vehicles that can be used.
-     *
-     * @return the best list of assets to send.
-     */
-    fun taskForce(assetInquiry: AssetInquiry, potentialVehicles: List<T>): List<T> {
-        var taskForce = emptyList<T>()
-        for (i in assetInquiry.vehicles.size downTo 0) {
-            taskForce = combinationRec(
-                potentialVehicles,
-                potentialVehicles.size,
-                i,
-                0,
-                mutableListOf(),
-                0,
-                assetInquiry
-            )
-            if (taskForce.isNotEmpty()) {
-                break
-            }
-        }
-        return taskForce
-    }
-
     /**
      * Handle the requests form other bases.
      * @param request The request to handle.
@@ -301,7 +238,8 @@ class BaseController<T : Vehicle>(
             request.emergencyResponse,
             logger,
             base.availableVehicles.filter { vehicle -> request.assetInquiry.canHelp(vehicle) },
-            request.assetInquiry
+            request.assetInquiry,
+            true
         )
         if (remainingInquiry.isFulfilled) {
             return emptyList()

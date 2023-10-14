@@ -30,11 +30,6 @@ data class PoliceStation(
         }
     }
 
-    override fun canMan(vehicles: List<PoliceVehicle>): Boolean {
-        return super.canMan(vehicles) &&
-            vehicles.count { it.vehicleType == VehicleType.K9_POLICE_CAR } <= this.dogNumber
-    }
-
     private fun cantAllocate(
         needed: Int,
         badLicense: Boolean,
@@ -103,6 +98,7 @@ data class PoliceStation(
                 needsLicense = badLicense
                 needsDogH = badDH
                 staff.allocatedTo = vehicle
+                staff.setReturningToBase()
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }
         }

@@ -47,4 +47,14 @@ data class Staff(
         // TODO events
         return currentShift.onCall && allocatedTo == null
     }
+
+    /**
+     * sets staff as going back to base
+     */
+    fun setReturningToBase() {
+        returningToBase = true
+        atBase = false
+        goingHome = false
+        atHome = false
+    }
 }

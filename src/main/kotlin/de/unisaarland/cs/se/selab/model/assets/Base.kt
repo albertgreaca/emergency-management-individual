@@ -68,10 +68,30 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     }
 
     /**
-     * Check if the vehicles can all be manned by this base simultaneously.
+     * Check if the vehicle can be manned by this base during a request.
      */
-    open fun canMan(vehicles: List<T>): Boolean {
-        return vehicles.sumOf { it.staffCapacity } <= this.staffNumber
+    open fun canManSimulationRequest(vehicle: Vehicle): Boolean {
+        var ans: Boolean = vehicle.staffCapacity <= this.staff.count { it.canBeAssignedWorking() }
+        if (vehicle.needsLicense) {
+            ans = ans && staff.any { it.canBeAssignedWorking() && it.hasLicense }
+        }
+        if (vehicle.vehicleType == VehicleType.K9_POLICE_CAR) {
+            ans = ans && staff.any { it.canBeAssignedWorking() && it.staffType == StaffType.DOG_HANDLER }
+        }
+        if (vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR) {
+            ans = ans && staff.any { it.canBeAssignedWorking() && it.staffType == StaffType.EMERGENCY_DOCTOR }
+        }
+        return ans
+    }
+
+    /**
+     * general function for can man
+     */
+    open fun canManSimulationBool(vehicle: Vehicle, request: Boolean): Boolean {
+        if (request) {
+            return canManSimulationRequest(vehicle)
+        }
+        return canManSimulation(vehicle)
     }
 
     /**

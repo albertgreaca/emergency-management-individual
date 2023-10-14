@@ -27,11 +27,6 @@ data class Hospital(
         }
     }
 
-    override fun canMan(vehicles: List<Ambulance>): Boolean {
-        return super.canMan(vehicles) &&
-            vehicles.count { it.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR } <= this.doctorNumber
-    }
-
     private fun cantAllocate(
         needed: Int,
         badLicense: Boolean,
@@ -104,6 +99,7 @@ data class Hospital(
                 needsLicense = badLicense
                 needsEMD = badEMD
                 staff.allocatedTo = vehicle
+                staff.setReturningToBase()
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }
         }
