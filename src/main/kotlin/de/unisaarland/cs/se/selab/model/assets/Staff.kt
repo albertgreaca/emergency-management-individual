@@ -65,19 +65,24 @@ data class Staff(
     /**
      * logs shift changes
      */
-    fun shiftLogger(logger: Logger) {
-        val hasShift = currentShift.working || currentShift.onCall
-        val nextDifferent = currentShift.working != nextShift.working ||
-            currentShift.onCall != nextShift.onCall
-        val shiftEnd = hasShift && nextDifferent
-        if (shiftEnd) {
-            logger.shiftEnd(name, id, currentShift.type)
-            logger.shiftStart(name, id, nextShift.type)
-            if (nextShift.onCall) {
-                logger.staffOnCall(name, id)
+    fun shiftLogger(logger: Logger, shift: ShiftType) {
+        if (currentShift.type == shift.getNext()) {
+            // his first shift is about to start
+            logger.shiftStart(name, id, currentShift.type)
+        }
+        if (currentShift.type == shift) {
+            // a shift is ending and another is beginning
+            if (currentShift.working && !nextShift.working) {
+                logger.shiftEnd(name, id, currentShift.type)
+            }
+            if (!currentShift.working && nextShift.working) {
+                logger.shiftStart(name, id, nextShift.type)
             }
             if (currentShift.onCall) {
                 logger.staffNotOnCall(name, id)
+            }
+            if (nextShift.onCall) {
+                logger.staffOnCall(name, id)
             }
         }
         if (outputLog) {
@@ -89,7 +94,10 @@ data class Staff(
     /**
      * updates the current and next shift for this staff member
      */
-    fun updateShifts() {
+    fun updateShifts(shift: ShiftType) {
+        if (currentShift.type != shift) {
+            return
+        }
         if (doubleShift) {
             val aux: Shift = Shift(nextShift.type.getNext(), false, false)
             if (!currentShift.working) {

@@ -1,0 +1,2687 @@
+{
+  "bases": [
+    {
+      "id": 0,
+      "baseType": "FIRE_STATION",
+      "location": 2,
+      "staff": 30
+    },
+    {
+      "id": 1,
+      "baseType": "POLICE_STATION",
+      "location": 4,
+      "staff": 12,
+      "dogs": 3
+    },
+    {
+      "id": 2,
+      "baseType": "HOSPITAL",
+      "location": 5,
+      "staff": 22,
+      "doctors": 3
+    },
+    {
+      "id": 3,
+      "baseType": "FIRE_STATION",
+      "location": 7,
+      "staff": 15
+    },
+    {
+      "id": 4,
+      "baseType": "POLICE_STATION",
+      "location": 9,
+      "staff": 25,
+      "dogs": 2
+    },
+    {
+      "id": 5,
+      "baseType": "HOSPITAL",
+      "location": 10,
+      "staff": 24,
+      "doctors": 3
+    },
+    {
+      "id": 6,
+      "baseType": "FIRE_STATION",
+      "location": 12,
+      "staff": 24
+    },
+    {
+      "id": 7,
+      "baseType": "POLICE_STATION",
+      "location": 14,
+      "staff": 31,
+      "dogs": 1
+    },
+    {
+      "id": 8,
+      "baseType": "HOSPITAL",
+      "location": 15,
+      "staff": 19,
+      "doctors": 1
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 0,
+      "baseID": 1,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "criminalCapacity": 3
+    },
+    {
+      "id": 1,
+      "baseID": 1,
+      "vehicleType": "K9_POLICE_CAR",
+      "vehicleHeight": 1,
+      "staffCapacity": 2
+    },
+    {
+      "id": 2,
+      "baseID": 1,
+      "vehicleType": "POLICE_MOTORCYCLE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    },
+    {
+      "id": 3,
+      "baseID": 1,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "criminalCapacity": 3
+    },
+    {
+      "id": 4,
+      "baseID": 1,
+      "vehicleType": "K9_POLICE_CAR",
+      "vehicleHeight": 1,
+      "staffCapacity": 2
+    },
+    {
+      "id": 5,
+      "baseID": 1,
+      "vehicleType": "POLICE_MOTORCYCLE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    },
+    {
+      "id": 6,
+      "baseID": 4,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "criminalCapacity": 3
+    },
+    {
+      "id": 7,
+      "baseID": 4,
+      "vehicleType": "K9_POLICE_CAR",
+      "vehicleHeight": 1,
+      "staffCapacity": 2
+    },
+    {
+      "id": 8,
+      "baseID": 4,
+      "vehicleType": "POLICE_MOTORCYCLE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    },
+    {
+      "id": 9,
+      "baseID": 4,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "criminalCapacity": 3
+    },
+    {
+      "id": 10,
+      "baseID": 4,
+      "vehicleType": "K9_POLICE_CAR",
+      "vehicleHeight": 1,
+      "staffCapacity": 2
+    },
+    {
+      "id": 11,
+      "baseID": 4,
+      "vehicleType": "POLICE_MOTORCYCLE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    },
+    {
+      "id": 12,
+      "baseID": 7,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "criminalCapacity": 3
+    },
+    {
+      "id": 13,
+      "baseID": 7,
+      "vehicleType": "K9_POLICE_CAR",
+      "vehicleHeight": 1,
+      "staffCapacity": 2
+    },
+    {
+      "id": 14,
+      "baseID": 7,
+      "vehicleType": "POLICE_MOTORCYCLE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    },
+    {
+      "id": 15,
+      "baseID": 7,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "criminalCapacity": 3
+    },
+    {
+      "id": 16,
+      "baseID": 7,
+      "vehicleType": "K9_POLICE_CAR",
+      "vehicleHeight": 1,
+      "staffCapacity": 2
+    },
+    {
+      "id": 17,
+      "baseID": 7,
+      "vehicleType": "POLICE_MOTORCYCLE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    },
+    {
+      "id": 18,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_WATER",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "waterCapacity": 600
+    },
+    {
+      "id": 19,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 3,
+      "staffCapacity": 4
+    },
+    {
+      "id": 20,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_LADDER",
+      "vehicleHeight": 4,
+      "staffCapacity": 1,
+      "ladderLength": 60
+    },
+    {
+      "id": 21,
+      "baseID": 0,
+      "vehicleType": "FIREFIGHTER_TRANSPORTER",
+      "vehicleHeight": 2,
+      "staffCapacity": 3
+    },
+    {
+      "id": 22,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_WATER",
+      "vehicleHeight": 2,
+      "staffCapacity": 2,
+      "waterCapacity": 600
+    },
+    {
+      "id": 23,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 3,
+      "staffCapacity": 4
+    },
+    {
+      "id": 24,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_LADDER",
+      "vehicleHeight": 4,
+      "staffCapacity": 5,
+      "ladderLength": 60
+    },
+    {
+      "id": 25,
+      "baseID": 0,
+      "vehicleType": "FIREFIGHTER_TRANSPORTER",
+      "vehicleHeight": 2,
+      "staffCapacity": 5
+    },
+    {
+      "id": 26,
+      "baseID": 3,
+      "vehicleType": "FIRE_TRUCK_WATER",
+      "vehicleHeight": 2,
+      "staffCapacity": 4,
+      "waterCapacity": 600
+    },
+    {
+      "id": 27,
+      "baseID": 3,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 3,
+      "staffCapacity": 4
+    },
+    {
+      "id": 28,
+      "baseID": 3,
+      "vehicleType": "FIRE_TRUCK_LADDER",
+      "vehicleHeight": 4,
+      "staffCapacity": 3,
+      "ladderLength": 60
+    },
+    {
+      "id": 29,
+      "baseID": 3,
+      "vehicleType": "FIREFIGHTER_TRANSPORTER",
+      "vehicleHeight": 2,
+      "staffCapacity": 4
+    },
+    {
+      "id": 30,
+      "baseID": 3,
+      "vehicleType": "FIRE_TRUCK_WATER",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "waterCapacity": 600
+    },
+    {
+      "id": 31,
+      "baseID": 3,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 3,
+      "staffCapacity": 4
+    },
+    {
+      "id": 32,
+      "baseID": 3,
+      "vehicleType": "FIRE_TRUCK_LADDER",
+      "vehicleHeight": 4,
+      "staffCapacity": 5,
+      "ladderLength": 60
+    },
+    {
+      "id": 33,
+      "baseID": 3,
+      "vehicleType": "FIREFIGHTER_TRANSPORTER",
+      "vehicleHeight": 2,
+      "staffCapacity": 5
+    },
+    {
+      "id": 34,
+      "baseID": 6,
+      "vehicleType": "FIRE_TRUCK_WATER",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "waterCapacity": 600
+    },
+    {
+      "id": 35,
+      "baseID": 6,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 3,
+      "staffCapacity": 4
+    },
+    {
+      "id": 36,
+      "baseID": 6,
+      "vehicleType": "FIRE_TRUCK_LADDER",
+      "vehicleHeight": 4,
+      "staffCapacity": 5,
+      "ladderLength": 60
+    },
+    {
+      "id": 37,
+      "baseID": 6,
+      "vehicleType": "FIREFIGHTER_TRANSPORTER",
+      "vehicleHeight": 2,
+      "staffCapacity": 7
+    },
+    {
+      "id": 38,
+      "baseID": 6,
+      "vehicleType": "FIRE_TRUCK_WATER",
+      "vehicleHeight": 2,
+      "staffCapacity": 5,
+      "waterCapacity": 600
+    },
+    {
+      "id": 39,
+      "baseID": 6,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 3,
+      "staffCapacity": 4
+    },
+    {
+      "id": 40,
+      "baseID": 6,
+      "vehicleType": "FIRE_TRUCK_LADDER",
+      "vehicleHeight": 4,
+      "staffCapacity": 5,
+      "ladderLength": 60
+    },
+    {
+      "id": 41,
+      "baseID": 6,
+      "vehicleType": "FIREFIGHTER_TRANSPORTER",
+      "vehicleHeight": 2,
+      "staffCapacity": 7
+    },
+    {
+      "id": 42,
+      "baseID": 2,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 4,
+      "staffCapacity": 2
+    },
+    {
+      "id": 43,
+      "baseID": 2,
+      "vehicleType": "EMERGENCY_DOCTOR_CAR",
+      "vehicleHeight": 3,
+      "staffCapacity": 2
+    },
+    {
+      "id": 44,
+      "baseID": 2,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 4,
+      "staffCapacity": 2
+    },
+    {
+      "id": 45,
+      "baseID": 2,
+      "vehicleType": "EMERGENCY_DOCTOR_CAR",
+      "vehicleHeight": 3,
+      "staffCapacity": 2
+    },
+    {
+      "id": 46,
+      "baseID": 5,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 4,
+      "staffCapacity": 2
+    },
+    {
+      "id": 47,
+      "baseID": 5,
+      "vehicleType": "EMERGENCY_DOCTOR_CAR",
+      "vehicleHeight": 3,
+      "staffCapacity": 2
+    },
+    {
+      "id": 48,
+      "baseID": 5,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 4,
+      "staffCapacity": 2
+    },
+    {
+      "id": 49,
+      "baseID": 5,
+      "vehicleType": "EMERGENCY_DOCTOR_CAR",
+      "vehicleHeight": 3,
+      "staffCapacity": 2
+    },
+    {
+      "id": 50,
+      "baseID": 8,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 4,
+      "staffCapacity": 2
+    },
+    {
+      "id": 51,
+      "baseID": 8,
+      "vehicleType": "EMERGENCY_DOCTOR_CAR",
+      "vehicleHeight": 3,
+      "staffCapacity": 2
+    },
+    {
+      "id": 52,
+      "baseID": 8,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 4,
+      "staffCapacity": 2
+    },
+    {
+      "id": 53,
+      "baseID": 8,
+      "vehicleType": "EMERGENCY_DOCTOR_CAR",
+      "vehicleHeight": 3,
+      "staffCapacity": 2
+    }
+  ],
+  "staff":[
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 2,
+      "name": "Ivysaur",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 3,
+      "name": "Venusaur",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 4,
+      "name": "Charmander",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 5,
+      "name": "Charmeleon",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 6,
+      "name": "Charizard",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 7,
+      "name": "Squirtle",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 8,
+      "name": "Wartortle",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 9,
+      "name": "Blastoise",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 10,
+      "name": "Caterpie",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 11,
+      "name": "Metapod",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 12,
+      "name": "Butterfree",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 13,
+      "name": "Weedle",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 14,
+      "name": "Kakuna",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 15,
+      "name": "Beedrill",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 16,
+      "name": "Pidgey",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 17,
+      "name": "Pidgeotto",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 18,
+      "name": "Pidgeot",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 19,
+      "name": "Rattata",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 20,
+      "name": "Raticate",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 21,
+      "name": "Spearow",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 22,
+      "name": "Fearow",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 23,
+      "name": "Ekans",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 24,
+      "name": "Arbok",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 25,
+      "name": "Pikachu",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 26,
+      "name": "Raichu",
+      "baseID": 0,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 27,
+      "name": "Sandshrew",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 28,
+      "name": "Sandslash",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 29,
+      "name": "Nidoran",
+      "baseID": 0,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 30,
+      "name": "Nidorina",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 31,
+      "name": "Nidoqueen",
+      "baseID": 3,
+      "ticksHome": 1,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 32,
+      "name": "Nidoran",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 33,
+      "name": "Nidorino",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 34,
+      "name": "Nidoking",
+      "baseID": 3,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 35,
+      "name": "Clefairy",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 36,
+      "name": "Clefable",
+      "baseID": 3,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 37,
+      "name": "Vulpix",
+      "baseID": 3,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 38,
+      "name": "Ninetales",
+      "baseID": 3,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 39,
+      "name": "Jugglypuff",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 40,
+      "name": "Wigglytuff",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 41,
+      "name": "Zubat",
+      "baseID": 3,
+      "ticksHome": 1,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 42,
+      "name": "Golbat",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 43,
+      "name": "Oddish",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 44,
+      "name": "Gloom",
+      "baseID": 3,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 45,
+      "name": "Vileplume",
+      "baseID": 3,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 46,
+      "name": "Paras",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 47,
+      "name": "Parasect",
+      "baseID": 6,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 48,
+      "name": "Venonat",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 49,
+      "name": "Venemoth",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 50,
+      "name": "Diglett",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 51,
+      "name": "Dugtrio",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 52,
+      "name": "Meowth",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 53,
+      "name": "Persian",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 54,
+      "name": "Psyduck",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 55,
+      "name": "Golduck",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 56,
+      "name": "Mankey",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 57,
+      "name": "Primeape",
+      "baseID": 6,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 58,
+      "name": "Growlithe",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 59,
+      "name": "Arcanine",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 60,
+      "name": "Poliwag",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 61,
+      "name": "Poliwhirl",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 62,
+      "name": "Poliwrath",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 63,
+      "name": "Abra",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 64,
+      "name": "Kadabra",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 65,
+      "name": "Alakazam",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 66,
+      "name": "Machop",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 67,
+      "name": "Machoke",
+      "baseID": 6,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 68,
+      "name": "Machamp",
+      "baseID": 6,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 69,
+      "name": "Bellsprout",
+      "baseID": 6,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 70,
+      "name": "Weepinbell",
+      "baseID": 1,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 71,
+      "name": "Victreebel",
+      "baseID": 1,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 72,
+      "name": "Tentacool",
+      "baseID": 1,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "DOG_HANDLER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 73,
+      "name": "Tentacruel",
+      "baseID": 1,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 74,
+      "name": "Geodude",
+      "baseID": 1,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "DOG_HANDLER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 75,
+      "name": "Graveler",
+      "baseID": 1,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 76,
+      "name": "Golem",
+      "baseID": 1,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 77,
+      "name": "Ponyta",
+      "baseID": 1,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 78,
+      "name": "Rapidash",
+      "baseID": 1,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "DOG_HANDLER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 79,
+      "name": "Slowpoke",
+      "baseID": 1,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 80,
+      "name": "Slowbro",
+      "baseID": 1,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 81,
+      "name": "Magnemite",
+      "baseID": 1,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 82,
+      "name": "Magneton",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 83,
+      "name": "Farfetch'd",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 84,
+      "name": "Doduo",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 85,
+      "name": "Dodrio",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 86,
+      "name": "Seel",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 87,
+      "name": "Dewgong",
+      "baseID": 4,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 88,
+      "name": "Grimer",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 89,
+      "name": "Muk",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 90,
+      "name": "Shellder",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 91,
+      "name": "Cloyster",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 92,
+      "name": "Gastly",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 93,
+      "name": "Haunter",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 94,
+      "name": "Gengar",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 95,
+      "name": "Onix",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 96,
+      "name": "Drowzee",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 97,
+      "name": "Hypno",
+      "baseID": 4,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 98,
+      "name": "Krabby",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 99,
+      "name": "Kingler",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "DOG_HANDLER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 100,
+      "name": "Voltorb",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 101,
+      "name": "Electrode",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 102,
+      "name": "Exeggcute",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 103,
+      "name": "Exeggutor",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 104,
+      "name": "Cubone",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "DOG_HANDLER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 105,
+      "name": "Marowak",
+      "baseID": 4,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 106,
+      "name": "Hitmonlee",
+      "baseID": 4,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 107,
+      "name": "Hitmonchan",
+      "baseID": 7,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 108,
+      "name": "Lickitung",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 109,
+      "name": "Koffing",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 110,
+      "name": "Weezing",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 111,
+      "name": "Rhyhorn",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 112,
+      "name": "Rhydon",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 113,
+      "name": "Chansey",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 114,
+      "name": "Tangela",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 115,
+      "name": "Kangaskhan",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 116,
+      "name": "Horsea",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 117,
+      "name": "Seadra",
+      "baseID": 7,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 118,
+      "name": "Goldeen",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 119,
+      "name": "Seaking",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 120,
+      "name": "Staryu",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 121,
+      "name": "Starmie",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 122,
+      "name": "Mr. Mime",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 123,
+      "name": "Scyther",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 124,
+      "name": "Jynx",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 125,
+      "name": "Electabuzz",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 126,
+      "name": "Magmar",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 127,
+      "name": "Pinsir",
+      "baseID": 7,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 128,
+      "name": "Tauros",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 129,
+      "name": "Magikarp",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 130,
+      "name": "Gyarados",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 131,
+      "name": "Lapras",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 132,
+      "name": "Ditto",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 133,
+      "name": "Eevee",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 134,
+      "name": "Vaporeon",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 135,
+      "name": "Jolteon",
+      "baseID": 7,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 136,
+      "name": "Flareon",
+      "baseID": 7,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "MOTORCYCLE"
+    },
+    {
+      "id": 137,
+      "name": "Porygon",
+      "baseID": 7,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "DOG_HANDLER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 138,
+      "name": "Omanyte",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 139,
+      "name": "Omastar",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 140,
+      "name": "Kabuto",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 141,
+      "name": "Kabutops",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 142,
+      "name": "Aerodactyl",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 143,
+      "name": "Snorlax",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 144,
+      "name": "Articuno",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 145,
+      "name": "Zapdos",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 146,
+      "name": "Moltres",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 147,
+      "name": "Dratini",
+      "baseID": 2,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 148,
+      "name": "Dragonair",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 149,
+      "name": "Dragonite",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 150,
+      "name": "Mewtwo",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 151,
+      "name": "Mew",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 152,
+      "name": "Chikorita",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 153,
+      "name": "Bayleef",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 154,
+      "name": "Meganium",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 155,
+      "name": "Cyndaquil",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 156,
+      "name": "Quilava",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 157,
+      "name": "Typhlosion",
+      "baseID": 2,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 158,
+      "name": "Totodile",
+      "baseID": 2,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 159,
+      "name": "Croconaw",
+      "baseID": 2,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 160,
+      "name": "Feraligatr",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 161,
+      "name": "Sentret",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 162,
+      "name": "Furret",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 163,
+      "name": "Hoothooot",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 164,
+      "name": "Noctowl",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 165,
+      "name": "Ledyba",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 166,
+      "name": "Ledian",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 167,
+      "name": "Spinarak",
+      "baseID": 5,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 168,
+      "name": "Ariados",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 169,
+      "name": "Crobat",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 170,
+      "name": "Chinchou",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 171,
+      "name": "Lanturn",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 172,
+      "name": "Pichu",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 173,
+      "name": "Cleffa",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 174,
+      "name": "Igglybuff",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 175,
+      "name": "Togepi",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 176,
+      "name": "Togetic",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 177,
+      "name": "Natu",
+      "baseID": 5,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 178,
+      "name": "Xatu",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 179,
+      "name": "Mareep",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 180,
+      "name": "Flaaffy",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 181,
+      "name": "Ampharos",
+      "baseID": 5,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 182,
+      "name": "Bellossom",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 183,
+      "name": "Marill",
+      "baseID": 5,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 184,
+      "name": "Azumarill",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 185,
+      "name": "Sudowoodo",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 186,
+      "name": "Politoed",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 187,
+      "name": "Hoppip",
+      "baseID": 8,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 188,
+      "name": "Skiploom",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 189,
+      "name": "Jumpluff",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 190,
+      "name": "Aipom",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 191,
+      "name": "Sunkern",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 192,
+      "name": "Sunflora",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 193,
+      "name": "Yanma",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 194,
+      "name": "Wooper",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 195,
+      "name": "Quagsire",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 196,
+      "name": "Espeon",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 197,
+      "name": "umbreon",
+      "baseID": 8,
+      "ticksHome": 3,
+      "shift": "LATE",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMERGENCY_DOCTOR",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 198,
+      "name": "Murkrow",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    },
+    {
+      "id": 199,
+      "name": "Slowking",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "LATE",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 200,
+      "name": "Misdreavus",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 201,
+      "name": "Unown",
+      "baseID": 8,
+      "ticksHome": 1,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "EMT",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 202,
+      "name": "Wobbuffet",
+      "baseID": 8,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": true,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    }
+  ]
+
+}
