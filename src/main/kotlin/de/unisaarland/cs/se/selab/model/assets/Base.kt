@@ -97,7 +97,7 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * Check if the base has enough special staff and reduce the number of special staff if necessary.
      */
-    open fun allocateStaff(emergencyResponse: EmergencyResponse, logger: Logger, vehicle: T): Int {
+    open fun allocateStaff(emergencyResponse: EmergencyResponse, logger: Logger, vehicle: T, request: Boolean): Int {
         // Do nothing by default
         return 0
     }
@@ -109,6 +109,7 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
         staffNumber += vehicle.staffCapacity
         for (staff in vehicle.assignedStaff) {
             staff.allocatedTo = null
+            staff.outputLog = true
         }
     }
 }

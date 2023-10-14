@@ -171,6 +171,12 @@ class Simulation(
                 }
             }
         }
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            if (simulationData.tick % shiftLength == shiftEnd) {
+                staff.shiftLogger(logger)
+                staff.updateShifts()
+            }
+        }
         handelEmergencies()
         val eventsEnded = eventHandler.update(logger)
         val eventActivated = eventHandler.activateEvents(logger)
@@ -182,5 +188,6 @@ class Simulation(
     }
     companion object {
         const val shiftLength = 10
+        const val shiftEnd = 9
     }
 }

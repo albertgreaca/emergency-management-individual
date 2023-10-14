@@ -45,7 +45,12 @@ data class PoliceStation(
         return false
     }
 
-    override fun allocateStaff(emergencyResponse: EmergencyResponse, logger: Logger, vehicle: PoliceVehicle): Int {
+    override fun allocateStaff(
+        emergencyResponse: EmergencyResponse,
+        logger: Logger,
+        vehicle: PoliceVehicle,
+        request: Boolean
+    ): Int {
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         var needsDogH: Boolean = vehicle.vehicleType == VehicleType.K9_POLICE_CAR
@@ -54,7 +59,7 @@ data class PoliceStation(
         }
         val hasBoth = policeStaff.any { it.canBeAssigned() && it.hasLicense && it.staffType == StaffType.DOG_HANDLER }
         for (staff in policeStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking()) {
+            if (staff.canBeAssignedWorking() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !(staff.staffType == StaffType.DOG_HANDLER)
                 val badBoth = badLicense && badDH
@@ -67,6 +72,9 @@ data class PoliceStation(
                 needsDogH = badDH
                 staff.allocatedTo = vehicle
             }
+        }
+        if (request) {
+            return 0
         }
         return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense, needsDogH, hasBoth)
     }
@@ -86,7 +94,7 @@ data class PoliceStation(
         val hasBoth = hasBoth2
         var maxTicks = 0
         for (staff in policeStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall()) {
+            if (staff.canBeAssignedOnCall() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !(staff.staffType == StaffType.DOG_HANDLER)
                 val badBoth = badLicense && badDH

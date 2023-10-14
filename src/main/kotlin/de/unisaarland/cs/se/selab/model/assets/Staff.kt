@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model.assets
 
+import de.unisaarland.cs.se.selab.logger.Logger
+
 /**
  * Class to represent staff members
  */
@@ -23,6 +25,8 @@ data class Staff(
     var atHome: Boolean = false,
     var returningToBase: Boolean = false
 ) {
+
+    var outputLog: Boolean = false
 
     /**
      * check if the staff can be assigned at all
@@ -56,5 +60,62 @@ data class Staff(
         atBase = false
         goingHome = false
         atHome = false
+    }
+
+    /**
+     * logs shift changes
+     */
+    fun shiftLogger(logger: Logger) {
+        val hasShift = currentShift.working || currentShift.onCall
+        val nextDifferent = currentShift.working != nextShift.working ||
+            currentShift.onCall != nextShift.onCall
+        val shiftEnd = hasShift && nextDifferent
+        if (shiftEnd) {
+            logger.shiftEnd(name, id, currentShift.type)
+            logger.shiftEnd(name, id, nextShift.type)
+            if (nextShift.onCall) {
+                logger.staffOnCall(name, id)
+            }
+            if (currentShift.onCall) {
+                logger.staffNotOnCall(name, id)
+            }
+        }
+        if (outputLog) {
+            logger.staffReturn(name, id)
+            outputLog = false
+        }
+    }
+
+    /**
+     * updates the current and next shift for this staff member
+     */
+    fun updateShifts() {
+        if (doubleShift) {
+            val aux: Shift = Shift(nextShift.type.getNext(), false, false)
+            if (!currentShift.working) {
+                aux.working = true
+            }
+            currentShift = nextShift
+            nextShift = aux
+            return
+        }
+        if (onCall) {
+            val aux: Shift = Shift(nextShift.type.getNext(), false, false)
+            if (currentShift.onCall) {
+                aux.working = true
+            }
+            if (nextShift.working) {
+                aux.onCall = true
+            }
+            currentShift = nextShift
+            nextShift = aux
+            return
+        }
+        val aux: Shift = Shift(nextShift.type.getNext(), false, false)
+        if (!currentShift.working && !nextShift.working) {
+            aux.working = true
+        }
+        currentShift = nextShift
+        nextShift = aux
     }
 }

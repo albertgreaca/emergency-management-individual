@@ -42,7 +42,12 @@ data class Hospital(
         return false
     }
 
-    override fun allocateStaff(emergencyResponse: EmergencyResponse, logger: Logger, vehicle: Ambulance): Int {
+    override fun allocateStaff(
+        emergencyResponse: EmergencyResponse,
+        logger: Logger,
+        vehicle: Ambulance,
+        request: Boolean
+    ): Int {
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         var needsEMD: Boolean = vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR
@@ -55,7 +60,7 @@ data class Hospital(
                 it.staffType == StaffType.EMERGENCY_DOCTOR
         }
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking()) {
+            if (staff.canBeAssignedWorking() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
                 val badBoth = badLicense && badEMD
@@ -68,6 +73,9 @@ data class Hospital(
                 needsEMD = badEMD
                 staff.allocatedTo = vehicle
             }
+        }
+        if (request) {
+            return 0
         }
         return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense, needsEMD, hasBoth)
     }
@@ -87,7 +95,7 @@ data class Hospital(
         val hasBoth = hasBoth2
         var maxTicks = 0
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall()) {
+            if (staff.canBeAssignedOnCall() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
                 val badBoth = badLicense && badEMD

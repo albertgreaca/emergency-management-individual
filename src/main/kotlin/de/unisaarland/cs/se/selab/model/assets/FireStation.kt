@@ -25,11 +25,16 @@ data class FireStation(
         return false
     }
 
-    override fun allocateStaff(emergencyResponse: EmergencyResponse, logger: Logger, vehicle: FireTruck): Int {
+    override fun allocateStaff(
+        emergencyResponse: EmergencyResponse,
+        logger: Logger,
+        vehicle: FireTruck,
+        request: Boolean
+    ): Int {
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         for (staff in fireStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking()) {
+            if (staff.canBeAssignedWorking() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 if (cantAllocate(needed, badLicense)) {
                     continue
@@ -39,6 +44,9 @@ data class FireStation(
                 needsLicense = badLicense
                 staff.allocatedTo = vehicle
             }
+        }
+        if (request) {
+            return 0
         }
         return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense)
     }
@@ -54,7 +62,7 @@ data class FireStation(
         var needsLicense = needsLicense2
         var maxTicks = 0
         for (staff in fireStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall()) {
+            if (staff.canBeAssignedOnCall() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 if (cantAllocate(needed, badLicense)) {
                     continue
