@@ -17,7 +17,7 @@ data class Ambulance(
     override var currentEmergency: Emergency? = null,
     override var broken: Boolean = false,
     override var inMaintenance: Boolean = false,
-    override var manning: Boolean = false,
+    override var manning: Int = 0,
     override var atTarget: Boolean = true,
     override var assignedStaff: List<Staff> = emptyList(),
     override var needsLicense: Boolean

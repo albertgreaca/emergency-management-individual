@@ -145,8 +145,8 @@ class BaseController<T : Vehicle>(
                     ?: error("A route from the base to the emergency needs to exist")
                 vehicle.location = vehicle.currentRoute.start
                 vehicle.atTarget = false
-                vehicle.manning = true
                 val extra = base.allocateStaff(emergencyResponse, logger, vehicle, request)
+                vehicle.manning = Math.max(1, extra)
                 base.staffNumber -= vehicle.staffCapacity
                 logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, extra + vehicle.timeToTarget))
                 allocatedVehicles.add(vehicle)

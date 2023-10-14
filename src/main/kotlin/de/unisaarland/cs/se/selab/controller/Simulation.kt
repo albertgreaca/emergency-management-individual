@@ -172,10 +172,7 @@ class Simulation(
             }
         }
         for (staff in simulationData.staff.sortedBy { it.id }) {
-            if (simulationData.tick % shiftLength == shiftEnd) {
-                staff.shiftLogger(logger, simulationData.shift)
-                staff.updateShifts(simulationData.shift)
-            }
+            staff.update(logger, simulationData)
         }
         handelEmergencies()
         val eventsEnded = eventHandler.update(logger)

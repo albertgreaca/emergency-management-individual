@@ -31,7 +31,7 @@ interface Vehicle {
     var specialCapacity: Int
     var currentRoute: Route
     var inMaintenance: Boolean
-    var manning: Boolean
+    var manning: Int
     var assignedStaff: List<Staff>
     val needsLicense: Boolean
 
@@ -65,8 +65,8 @@ interface Vehicle {
      * @return True if the vehicle arrived at target.
      */
     fun update(): Boolean {
-        if (manning) {
-            manning = false
+        if (manning > 0) {
+            manning--
             return false
         }
         currentRoute = currentRoute.move(SPEED)

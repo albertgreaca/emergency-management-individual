@@ -1,6 +1,8 @@
 package de.unisaarland.cs.se.selab.model.assets
 
+import de.unisaarland.cs.se.selab.controller.Simulation
 import de.unisaarland.cs.se.selab.logger.Logger
+import de.unisaarland.cs.se.selab.model.SimulationData
 
 /**
  * Class to represent staff members
@@ -59,6 +61,16 @@ data class Staff(
         returningToBase = true
         atBase = false
         goingHome = false
+        atHome = false
+    }
+
+    /**
+     * sends a staff member home
+     */
+    fun setReturningHome() {
+        returningToBase = false
+        atBase = false
+        goingHome = true
         atHome = false
     }
 
@@ -125,5 +137,57 @@ data class Staff(
         }
         currentShift = nextShift
         nextShift = aux
+    }
+
+    /**
+     * updates the position of an asset based on boolean flags
+     */
+    fun updatePosition() {
+        if (allocatedTo != null) {
+            return
+        }
+        if (goingHome) {
+            if (ticksAwayFromBase == ticksHome) {
+                return
+            }
+            ticksAwayFromBase++
+            atBase = false
+            if (ticksAwayFromBase == ticksHome) {
+                atHome = true
+                goingHome = false
+            }
+            return
+        }
+        if (returningToBase) {
+            if (ticksAwayFromBase == 0) {
+                return
+            }
+            ticksAwayFromBase--
+            atHome = false
+            if (ticksAwayFromBase == 0) {
+                atBase = true
+                returningToBase = false
+            }
+        }
+    }
+
+    /**
+     * updates a staff member's position, shifts and booleans
+     */
+    fun update(logger: Logger, simulationData: SimulationData) {
+        updatePosition()
+        if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
+            shiftLogger(logger, simulationData.shift)
+            updateShifts(simulationData.shift)
+        }
+        if (
+            nextShift.working &&
+            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase >= Simulation.shiftLength
+        ) {
+            setReturningToBase()
+        }
+        if (currentShift.onCall) {
+            setReturningHome()
+        }
     }
 }
