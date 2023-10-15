@@ -26,7 +26,8 @@ data class Staff(
     var goingHome: Boolean = false,
     var atHome: Boolean = false,
     var returningToBase: Boolean = false,
-    var workedTicksThisShift: Int = 0
+    var workedTicksThisShift: Int = 0,
+    var wasUnavailable: Boolean = false
 ) {
 
     var outputLog: Boolean = false
@@ -35,7 +36,9 @@ data class Staff(
      * check if the staff can be assigned at all
      */
     fun canBeAssigned(): Boolean {
-        // TODO events
+        if (unavailable) {
+            return false
+        }
         return (currentShift.working || currentShift.onCall) && allocatedTo == null
     }
 
@@ -43,7 +46,9 @@ data class Staff(
      * check if the staff can be assigned and is working this shift
      */
     fun canBeAssignedWorking(): Boolean {
-        // TODO events
+        if (unavailable) {
+            return false
+        }
         return currentShift.working && allocatedTo == null
     }
 
@@ -51,7 +56,9 @@ data class Staff(
      * check if the staff can be assigned and is on call
      */
     fun canBeAssignedOnCall(): Boolean {
-        // TODO events
+        if (unavailable) {
+            return false
+        }
         return currentShift.onCall && allocatedTo == null
     }
 
@@ -73,6 +80,28 @@ data class Staff(
         atBase = false
         goingHome = true
         atHome = false
+    }
+
+    /**
+     * puts the staff at the base
+     */
+    fun setAtBase() {
+        returningToBase = false
+        atBase = true
+        goingHome = false
+        atHome = false
+        ticksAwayFromBase = 0
+    }
+
+    /**
+     * puts the staff at home
+     */
+    fun setAtHome() {
+        returningToBase = false
+        atBase = false
+        goingHome = false
+        atHome = true
+        ticksAwayFromBase = ticksHome
     }
 
     /**
@@ -112,6 +141,7 @@ data class Staff(
             return
         }
         workedTicksThisShift = 0
+        wasUnavailable = false
         if (doubleShift) {
             val aux: Shift = Shift(nextShift.type.getNext(), false, false)
             if (!currentShift.working) {
@@ -184,6 +214,9 @@ data class Staff(
                 workedTicksThisShift++
             }
         }
+        if (unavailable) {
+            wasUnavailable = true
+        }
     }
 
     /**
@@ -193,7 +226,7 @@ data class Staff(
         countTicks(logger)
         updatePosition()
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
-            if (currentShift.type == simulationData.shift && currentShift.working) {
+            if (currentShift.type == simulationData.shift && currentShift.working && !wasUnavailable) {
                 logger.numberShiftsWorked++
             }
             if (
@@ -208,7 +241,8 @@ data class Staff(
         }
         if (
             nextShift.working &&
-            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase >= Simulation.shiftLength
+            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase >= Simulation.shiftLength &&
+            !unavailable
         ) {
             setReturningToBase()
         }

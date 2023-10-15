@@ -13,17 +13,34 @@ class VacationEvent(
     override var isDone: Boolean = false
 
     override fun trigger(simulationData: SimulationData): Boolean {
-        // TODO actually implement this blin
         val affectedStaff = simulationData.staff.find { it.id == staffId } ?: error(
             "Staff for vacation event not found"
         )
+        if (affectedStaff.allocatedTo != null) {
+            tick++
+            return false
+        }
         if (!affectedStaff.unavailable) {
             affectedStaff.unavailable = true
         }
+        affectedStaff.ticksSpentAtEmergencies = 0
+        affectedStaff.setReturningHome()
         return true
     }
 
     override fun update(simulationData: SimulationData) {
+        val affectedStaff = simulationData.staff.find { it.id == staffId } ?: error(
+            "Staff for vacation event not found"
+        )
+        if (tick + duration <= simulationData.tick) {
+            isDone = true
+            affectedStaff.unavailable = false
+        }
         return
+    }
+
+    companion object {
+        const val shiftLength = 10
+        const val shiftEnd = 9
     }
 }
