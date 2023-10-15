@@ -138,7 +138,14 @@ class BaseController<T : Vehicle>(
             if (
                 assetInquiry.isFulfillable(vehicle) &&
                 assetInquiry.canHelp(vehicle) &&
-                base.canManSimulationBool(vehicle, request)
+                base.canManSimulationBool(
+                    vehicle,
+                    emergencyResponse.maxTravelTime - ceil(
+                        (potentialRoutes[vehicle.vehicleHeight]?.length ?: error("route needs to exist")) /
+                            SPEED.toDouble()
+                    ).toInt(),
+                    request
+                )
             ) {
                 vehicle.currentEmergency = emergencyResponse.emergency
                 vehicle.currentRoute = potentialRoutes[vehicle.vehicleHeight]?.move(0)

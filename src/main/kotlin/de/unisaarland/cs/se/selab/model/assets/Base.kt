@@ -53,8 +53,10 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * Check if the vehicle can be manned by this base during simulation.
      */
-    open fun canManSimulation(vehicle: Vehicle): Boolean {
-        var ans: Boolean = vehicle.staffCapacity <= this.staff.count { it.canBeAssigned() }
+    open fun canManSimulation(vehicle: Vehicle, ticksLimit: Int): Boolean {
+        var ans: Boolean = vehicle.staffCapacity <= this.staff.count {
+            it.canBeAssigned() && it.ticksAwayFromBase <= ticksLimit
+        }
         if (vehicle.needsLicense) {
             ans = ans && staff.any { it.canBeAssigned() && it.hasLicense }
         }
@@ -70,8 +72,10 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * Check if the vehicle can be manned by this base during a request.
      */
-    open fun canManSimulationRequest(vehicle: Vehicle): Boolean {
-        var ans: Boolean = vehicle.staffCapacity <= this.staff.count { it.canBeAssignedWorking() }
+    open fun canManSimulationRequest(vehicle: Vehicle, ticksLimit: Int): Boolean {
+        var ans: Boolean = vehicle.staffCapacity <= this.staff.count {
+            it.canBeAssignedWorking() && it.ticksAwayFromBase <= ticksLimit
+        }
         if (vehicle.needsLicense) {
             ans = ans && staff.any { it.canBeAssignedWorking() && it.hasLicense }
         }
@@ -87,11 +91,11 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * general function for can man
      */
-    open fun canManSimulationBool(vehicle: Vehicle, request: Boolean): Boolean {
+    open fun canManSimulationBool(vehicle: Vehicle, ticksLimit: Int, request: Boolean): Boolean {
         if (request) {
-            return canManSimulationRequest(vehicle)
+            return canManSimulationRequest(vehicle, ticksLimit)
         }
-        return canManSimulation(vehicle)
+        return canManSimulation(vehicle, ticksLimit)
     }
 
     /**
