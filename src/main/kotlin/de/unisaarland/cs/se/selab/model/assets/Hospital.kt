@@ -30,16 +30,22 @@ data class Hospital(
     private fun cantAllocate(
         needed: Int,
         badLicense: Boolean,
-        badED: Boolean,
-        hasBoth: Boolean,
-        badBoth: Boolean
+        badED: Boolean
     ): Boolean {
-        val cond1 = needed == 1 && (badLicense || badED)
-        val cond2 = needed == 2 && !hasBoth && badBoth
-        if (cond1 || cond2) {
+        if (needed == 1 && badLicense) {
+            return true
+        }
+        if (needed == 0 && badED) {
             return true
         }
         return false
+    }
+
+    private fun updateNeeded(needed: Int, staff: Staff): Int {
+        if (!(staff.staffType == StaffType.EMERGENCY_DOCTOR)) {
+            return needed - 1
+        }
+        return needed
     }
 
     override fun allocateStaff(
@@ -54,21 +60,15 @@ data class Hospital(
         if (vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR) {
             doctorNumber--
         }
-        val hasBoth = hospitalStaff.any {
-            it.canBeAssigned() &&
-                it.hasLicense &&
-                it.staffType == StaffType.EMERGENCY_DOCTOR
-        }
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking() && needed > 0) {
+            if (staff.canBeAssignedWorking() && (needed > 0 || needsEMD)) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
-                val badBoth = badLicense && badEMD
-                if (cantAllocate(needed, badLicense, badEMD, hasBoth, badBoth)) {
+                if (cantAllocate(needed, badLicense, badEMD)) {
                     continue
                 }
                 logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
-                needed -= 1
+                needed = updateNeeded(needed, staff)
                 needsLicense = badLicense
                 needsEMD = badEMD
                 staff.allocatedTo = vehicle
@@ -78,7 +78,7 @@ data class Hospital(
         if (request) {
             return 0
         }
-        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense, needsEMD, hasBoth)
+        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense, needsEMD)
     }
 
     private fun allocateStaffOnCall(
@@ -87,24 +87,21 @@ data class Hospital(
         vehicle: Ambulance,
         needed2: Int,
         needsLicense2: Boolean,
-        needsEMD2: Boolean,
-        hasBoth2: Boolean
+        needsEMD2: Boolean
     ): Int {
         var needed = needed2
         var needsLicense = needsLicense2
         var needsEMD = needsEMD2
-        val hasBoth = hasBoth2
         var maxTicks = 0
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall() && needed > 0) {
+            if (staff.canBeAssignedOnCall() && (needed > 0 || needsEMD)) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
-                val badBoth = badLicense && badEMD
-                if (cantAllocate(needed, badLicense, badEMD, hasBoth, badBoth)) {
+                if (cantAllocate(needed, badLicense, badEMD)) {
                     continue
                 }
                 logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
-                needed -= 1
+                needed = updateNeeded(needed, staff)
                 needsLicense = badLicense
                 needsEMD = badEMD
                 staff.allocatedTo = vehicle

@@ -14,16 +14,6 @@ data class FireStation(
     val trucks: List<FireTruck>,
     val fireStaff: List<Staff>
 ) : Base<FireTruck>(trucks, fireStaff) {
-    private fun cantAllocate(
-        needed: Int,
-        badLicense: Boolean
-    ): Boolean {
-        val cond1 = needed == 1 && badLicense
-        if (cond1) {
-            return true
-        }
-        return false
-    }
 
     override fun allocateStaff(
         emergencyResponse: EmergencyResponse,
@@ -36,7 +26,7 @@ data class FireStation(
         for (staff in fireStaff.sortedBy { it.id }) {
             if (staff.canBeAssignedWorking() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
-                if (cantAllocate(needed, badLicense)) {
+                if (needed == 1 && badLicense) {
                     continue
                 }
                 logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
@@ -65,7 +55,7 @@ data class FireStation(
         for (staff in fireStaff.sortedBy { it.id }) {
             if (staff.canBeAssignedOnCall() && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
-                if (cantAllocate(needed, badLicense)) {
+                if (needed == 1 && badLicense) {
                     continue
                 }
                 logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
