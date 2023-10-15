@@ -71,6 +71,7 @@ data class PoliceStation(
                 needsLicense = badLicense
                 needsDogH = badDH
                 staff.allocatedTo = vehicle
+                vehicle.assignedStaff.add(staff)
             }
         }
         if (request) {
@@ -106,6 +107,7 @@ data class PoliceStation(
                 needsLicense = badLicense
                 needsDogH = badDH
                 staff.allocatedTo = vehicle
+                vehicle.assignedStaff.add(staff)
                 staff.setReturningToBase()
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }

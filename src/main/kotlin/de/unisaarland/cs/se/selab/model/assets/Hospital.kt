@@ -72,6 +72,7 @@ data class Hospital(
                 needsLicense = badLicense
                 needsEMD = badEMD
                 staff.allocatedTo = vehicle
+                vehicle.assignedStaff.add(staff)
             }
         }
         if (request) {
@@ -107,6 +108,7 @@ data class Hospital(
                 needsLicense = badLicense
                 needsEMD = badEMD
                 staff.allocatedTo = vehicle
+                vehicle.assignedStaff.add(staff)
                 staff.setReturningToBase()
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }

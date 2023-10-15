@@ -43,6 +43,7 @@ data class FireStation(
                 needed -= 1
                 needsLicense = badLicense
                 staff.allocatedTo = vehicle
+                vehicle.assignedStaff.add(staff)
             }
         }
         if (request) {
@@ -71,6 +72,7 @@ data class FireStation(
                 needed -= 1
                 needsLicense = badLicense
                 staff.allocatedTo = vehicle
+                vehicle.assignedStaff.add(staff)
                 staff.setReturningToBase()
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }

@@ -19,7 +19,7 @@ data class PoliceVehicle(
     override var inMaintenance: Boolean = false,
     override var manning: Int = 0,
     override var atTarget: Boolean = true,
-    override var assignedStaff: List<Staff> = emptyList(),
+    override var assignedStaff: MutableList<Staff> = mutableListOf(),
     override var needsLicense: Boolean
 ) : Vehicle {
     override val ready: Boolean

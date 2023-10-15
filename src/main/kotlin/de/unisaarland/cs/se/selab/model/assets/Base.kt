@@ -111,5 +111,6 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
             staff.allocatedTo = null
             staff.outputLog = true
         }
+        vehicle.assignedStaff.clear()
     }
 }

@@ -32,7 +32,7 @@ interface Vehicle {
     var currentRoute: Route
     var inMaintenance: Boolean
     var manning: Int
-    var assignedStaff: List<Staff>
+    val assignedStaff: MutableList<Staff>
     val needsLicense: Boolean
 
     val target: Location
