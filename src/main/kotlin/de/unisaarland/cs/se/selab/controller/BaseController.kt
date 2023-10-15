@@ -146,7 +146,7 @@ class BaseController<T : Vehicle>(
                 vehicle.location = vehicle.currentRoute.start
                 vehicle.atTarget = false
                 val extra = base.allocateStaff(emergencyResponse, logger, vehicle, request)
-                vehicle.manning = Math.max(1, extra)
+                vehicle.manning = Math.max(1, 1 + extra)
                 base.staffNumber -= vehicle.staffCapacity
                 logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, extra + vehicle.timeToTarget))
                 allocatedVehicles.add(vehicle)

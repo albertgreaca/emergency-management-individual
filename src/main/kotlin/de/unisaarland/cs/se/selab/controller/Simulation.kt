@@ -172,7 +172,7 @@ class Simulation(
             }
         }
         for (staff in simulationData.staff.sortedBy { it.id }) {
-            staff.update(logger, simulationData)
+            staff.updateAndCount(logger, simulationData)
         }
         handelEmergencies()
         val eventsEnded = eventHandler.update(logger)

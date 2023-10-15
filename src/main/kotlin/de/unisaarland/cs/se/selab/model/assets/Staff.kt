@@ -25,7 +25,8 @@ data class Staff(
     var atBase: Boolean = true,
     var goingHome: Boolean = false,
     var atHome: Boolean = false,
-    var returningToBase: Boolean = false
+    var returningToBase: Boolean = false,
+    var workedTicksThisShift: Int = 0
 ) {
 
     var outputLog: Boolean = false
@@ -110,6 +111,7 @@ data class Staff(
         if (currentShift.type != shift) {
             return
         }
+        workedTicksThisShift = 0
         if (doubleShift) {
             val aux: Shift = Shift(nextShift.type.getNext(), false, false)
             if (!currentShift.working) {
@@ -172,11 +174,35 @@ data class Staff(
     }
 
     /**
+     * counts working ticks
+     */
+    fun countTicks(logger: Logger) {
+        if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
+            val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
+            if (!em.handlingStarted || !(em.handlingTime == 1)) {
+                logger.numberTicksWorked++
+                workedTicksThisShift++
+            }
+        }
+    }
+
+    /**
      * updates a staff member's position, shifts and booleans
      */
-    fun update(logger: Logger, simulationData: SimulationData) {
+    fun updateAndCount(logger: Logger, simulationData: SimulationData) {
+        countTicks(logger)
         updatePosition()
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
+            if (currentShift.type == simulationData.shift && currentShift.working) {
+                logger.numberShiftsWorked++
+            }
+            if (
+                currentShift.type == simulationData.shift &&
+                currentShift.onCall &&
+                workedTicksThisShift == Simulation.shiftLength
+            ) {
+                logger.numberShiftsWorked++
+            }
             shiftLogger(logger, simulationData.shift)
             updateShifts(simulationData.shift)
         }

@@ -18,8 +18,8 @@ class Logger(private val writer: PrintWriter) {
     private var numberReceivedEmergencies: Int = 0
     private var numberFailedEmergencies: Int = 0
     private var numberResolvedEmergencies: Int = 0
-    private val numberShiftsWorked: Int = 0
-    private val numberTicksWorked: Int = 0
+    var numberShiftsWorked: Int = 0
+    var numberTicksWorked: Int = 0
 
     /**
      * Initializes a resource and logs the result.
