@@ -105,10 +105,15 @@ data class PoliceStation(
         var needsDogH = needsDogH2
         var maxTicks = 0
         for (staff in policeStaff.sortedBy { it.id }) {
-            val ok = needed > 0 || needsDogH
+            val isdogh = staff.staffType == StaffType.DOG_HANDLER
+            val ok = if (isdogh) {
+                needsDogH
+            } else {
+                needed > 0
+            }
             if (staff.canBeAssignedOnCall() && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
-                val badDH = needsDogH && !(staff.staffType == StaffType.DOG_HANDLER)
+                val badDH = needsDogH && !isdogh
                 if (cantAllocate(needed, badLicense, badDH)) {
                     continue
                 }
