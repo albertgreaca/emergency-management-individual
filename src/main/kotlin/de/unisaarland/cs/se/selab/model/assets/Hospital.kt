@@ -62,10 +62,15 @@ data class Hospital(
             doctorNumber--
         }
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            val ok = needed > 0 || needsEMD
+            val isEMD = staff.staffType == StaffType.EMERGENCY_DOCTOR
+            val ok = if (isEMD) {
+                needsEMD
+            } else {
+                needed > 0
+            }
             if (staff.canBeAssignedWorking() && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
-                val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
+                val badEMD = needsEMD && !isEMD
                 if (cantAllocate(needed, badLicense, badEMD)) {
                     continue
                 }
