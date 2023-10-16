@@ -254,7 +254,7 @@ data class Staff(
      */
     fun logStaffOnCall(logger: Logger, simulationData: SimulationData) {
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
-            if (nextShift.onCall) {
+            if (currentShift.type == simulationData.shift && nextShift.onCall) {
                 logger.staffOnCall(name, id)
             }
         }
@@ -265,7 +265,7 @@ data class Staff(
      */
     fun logStaffNotOnCall(logger: Logger, simulationData: SimulationData) {
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
-            if (currentShift.onCall) {
+            if (currentShift.type == simulationData.shift && currentShift.onCall) {
                 logger.staffNotOnCall(name, id)
             }
         }
