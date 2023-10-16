@@ -172,6 +172,19 @@ class Simulation(
             }
         }
         for (staff in simulationData.staff.sortedBy { it.id }) {
+            staff.logShiftEnd(logger, simulationData)
+        }
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            staff.logShiftStart(logger, simulationData)
+        }
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            staff.logStaffOnCall(logger, simulationData)
+        }
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            staff.logStaffNotOnCall(logger, simulationData)
+        }
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            staff.logReturn(logger)
             staff.updateAndCount(logger, simulationData)
         }
         handelEmergencies()

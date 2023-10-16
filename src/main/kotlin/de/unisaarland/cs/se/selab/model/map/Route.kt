@@ -39,7 +39,7 @@ open class Route(
             return Route(
                 DynamicRoadLocation(nextRoad, nextRoad.source == nextNode, nextRoad.weight()),
                 target,
-                Path(path.graph, path.vertices.drop(1), path.length - nextRoad.weight())
+                Path(path.graph, path.vertices.drop(1).toMutableList(), path.length - nextRoad.weight())
             ).move(distance - distanceToNextNode)
         } else if (start is DynamicRoadLocation) {
             val newPosition = if (start.road.source == path.vertices.first()) {

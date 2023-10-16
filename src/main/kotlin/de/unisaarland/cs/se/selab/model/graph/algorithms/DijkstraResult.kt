@@ -37,10 +37,10 @@ fun <VertexTy : Comparable<VertexTy>, EdgeTy> Graph<VertexTy, EdgeTy>.shortestPa
     ).andThen({
         Path(
             this,
-            reconstructPath(source, it),
+            reconstructPath(source, it).toMutableList(),
             assertNotNull(it.distances[it.closestTargets.min()])
         )
-    }, { _ -> Path(this, emptyList(), Int.MAX_VALUE) })
+    }, { _ -> Path(this, mutableListOf(), Int.MAX_VALUE) })
 }
 
 /**

@@ -6,7 +6,10 @@ import de.unisaarland.cs.se.selab.model.graph.Path
 /**
  * A class representing a route which has reached its target.
  */
-class TargetReached(target: Location, graph: Graph<Node, Road>) : Route(target, target, Path(graph, emptyList(), 0)) {
+class TargetReached(
+    target: Location,
+    graph: Graph<Node, Road>
+) : Route(target, target, Path(graph, mutableListOf(), 0)) {
 
     override val length: Int = 0
     override fun move(distance: Int): Route {

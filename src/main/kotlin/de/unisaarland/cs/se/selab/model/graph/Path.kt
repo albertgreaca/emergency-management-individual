@@ -5,7 +5,7 @@ package de.unisaarland.cs.se.selab.model.graph
  */
 data class Path<VertexTy, EdgeTy>(
     val graph: Graph<VertexTy, EdgeTy>,
-    val vertices: List<VertexTy>,
+    val vertices: MutableList<VertexTy>,
     val length: Int
 ) {
     /**

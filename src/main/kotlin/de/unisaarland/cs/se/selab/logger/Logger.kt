@@ -60,7 +60,13 @@ class Logger(private val writer: PrintWriter) {
      * Logs the emergency assignment.
      */
     fun emergency(emergencyId: Int, baseId: Int, shortestPath: Path<Node, Road>) {
+        if (shortestPath.vertices.size == 1) {
+            shortestPath.vertices.add(shortestPath.vertices[0])
+        }
         writer.println("Emergency Assignment: $emergencyId assigned to $baseId via $shortestPath")
+        if (shortestPath.vertices.size == 2) {
+            shortestPath.vertices.removeLast()
+        }
         numberReceivedEmergencies++
         writer.flush()
     }

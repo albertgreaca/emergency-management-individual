@@ -105,35 +105,6 @@ data class Staff(
     }
 
     /**
-     * logs shift changes
-     */
-    fun shiftLogger(logger: Logger, shift: ShiftType) {
-        if (currentShift.type == shift.getNext()) {
-            // his first shift is about to start
-            logger.shiftStart(name, id, currentShift.type)
-        }
-        if (currentShift.type == shift) {
-            // a shift is ending and another is beginning
-            if (currentShift.working && !nextShift.working) {
-                logger.shiftEnd(name, id, currentShift.type)
-            }
-            if (!currentShift.working && nextShift.working) {
-                logger.shiftStart(name, id, nextShift.type)
-            }
-            if (currentShift.onCall) {
-                logger.staffNotOnCall(name, id)
-            }
-            if (nextShift.onCall) {
-                logger.staffOnCall(name, id)
-            }
-        }
-        if (outputLog) {
-            logger.staffReturn(name, id)
-            outputLog = false
-        }
-    }
-
-    /**
      * updates the current and next shift for this staff member
      */
     fun updateShifts(shift: ShiftType) {
@@ -236,7 +207,6 @@ data class Staff(
             ) {
                 logger.numberShiftsWorked++
             }
-            shiftLogger(logger, simulationData.shift)
             updateShifts(simulationData.shift)
         }
         if (
@@ -249,5 +219,65 @@ data class Staff(
         if (currentShift.onCall) {
             setReturningHome()
         }
+    }
+
+    /**
+     * logs shift start if needed
+     */
+    fun logShiftStart(logger: Logger, simulationData: SimulationData) {
+        if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
+            if (currentShift.type == simulationData.shift.getNext()) {
+                // his first shift is about to start
+                logger.shiftStart(name, id, currentShift.type)
+                return
+            }
+            if (currentShift.type == simulationData.shift && !currentShift.working && nextShift.working) {
+                logger.shiftStart(name, id, currentShift.type)
+                return
+            }
+        }
+    }
+
+    /**
+     * logs shift end
+     */
+    fun logShiftEnd(logger: Logger, simulationData: SimulationData) {
+        if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
+            if (currentShift.type == simulationData.shift && currentShift.working && !nextShift.working) {
+                logger.shiftEnd(name, id, currentShift.type)
+            }
+        }
+    }
+
+    /**
+     * logs staff on call
+     */
+    fun logStaffOnCall(logger: Logger, simulationData: SimulationData) {
+        if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
+            if (nextShift.onCall) {
+                logger.staffOnCall(name, id)
+            }
+        }
+    }
+
+    /**
+     * logs staff not on call
+     */
+    fun logStaffNotOnCall(logger: Logger, simulationData: SimulationData) {
+        if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
+            if (currentShift.onCall) {
+                logger.staffNotOnCall(name, id)
+            }
+        }
+    }
+
+    /**
+     * logs return if needed
+     */
+    fun logReturn(logger: Logger) {
+        if (outputLog) {
+            logger.staffReturn(name, id)
+        }
+        outputLog = false
     }
 }
