@@ -2,6 +2,7 @@ package de.unisaarland.cs.se.selab.model.assets
 
 import de.unisaarland.cs.se.selab.controller.EmergencyResponse
 import de.unisaarland.cs.se.selab.logger.Logger
+import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.map.Node
 
 /**
@@ -56,8 +57,10 @@ data class PoliceStation(
         logger: Logger,
         vehicle: PoliceVehicle,
         ticksLimit: Int,
-        request: Boolean
-    ): Int {
+        request: Boolean,
+        simulationData: SimulationData
+    ): Pair<Int, MutableList<Staff>> {
+        val allocatedStaff: MutableList<Staff> = mutableListOf()
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         var needsDogH: Boolean = vehicle.vehicleType == VehicleType.K9_POLICE_CAR
@@ -71,13 +74,13 @@ data class PoliceStation(
             } else {
                 needed > 0
             }
-            if (staff.canBeAssignedWorking() && staff.ticksAwayFromBase <= ticksLimit && ok) {
+            if (staff.canBeAssignedWorking(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !isdogh
                 if (cantAllocate(needed, badLicense, badDH)) {
                     continue
                 }
-                logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
+                allocatedStaff.add(staff)
                 needed = updateNeeded(needed, staff)
                 needsLicense = badLicense
                 needsDogH = badDH
@@ -86,20 +89,20 @@ data class PoliceStation(
             }
         }
         if (request) {
-            return 0
+            return Pair(0, allocatedStaff)
         }
-        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, ticksLimit, needsLicense, needsDogH)
+        return allocateStaffOnCall(vehicle, needed, ticksLimit, needsLicense, needsDogH, allocatedStaff, simulationData)
     }
 
     private fun allocateStaffOnCall(
-        emergencyResponse: EmergencyResponse,
-        logger: Logger,
         vehicle: PoliceVehicle,
         ticksLimit: Int,
         needed2: Int,
         needsLicense2: Boolean,
-        needsDogH2: Boolean
-    ): Int {
+        needsDogH2: Boolean,
+        allocatedStaff: MutableList<Staff>,
+        simulationData: SimulationData
+    ): Pair<Int, MutableList<Staff>> {
         var needed = needed2
         var needsLicense = needsLicense2
         var needsDogH = needsDogH2
@@ -111,13 +114,13 @@ data class PoliceStation(
             } else {
                 needed > 0
             }
-            if (staff.canBeAssignedOnCall() && staff.ticksAwayFromBase <= ticksLimit && ok) {
+            if (staff.canBeAssignedOnCall(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !isdogh
                 if (cantAllocate(needed, badLicense, badDH)) {
                     continue
                 }
-                logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
+                allocatedStaff.add(staff)
                 needed = updateNeeded(needed, staff)
                 needsLicense = badLicense
                 needsDogH = badDH
@@ -127,6 +130,6 @@ data class PoliceStation(
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }
         }
-        return maxTicks
+        return Pair(maxTicks, allocatedStaff)
     }
 }

@@ -2,6 +2,7 @@ package de.unisaarland.cs.se.selab.model.assets
 
 import de.unisaarland.cs.se.selab.controller.EmergencyResponse
 import de.unisaarland.cs.se.selab.logger.Logger
+import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.map.Node
 
 /**
@@ -53,8 +54,10 @@ data class Hospital(
         logger: Logger,
         vehicle: Ambulance,
         ticksLimit: Int,
-        request: Boolean
-    ): Int {
+        request: Boolean,
+        simulationData: SimulationData
+    ): Pair<Int, MutableList<Staff>> {
+        val allocatedStaff: MutableList<Staff> = mutableListOf()
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         var needsEMD: Boolean = vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR
@@ -68,13 +71,13 @@ data class Hospital(
             } else {
                 needed > 0
             }
-            if (staff.canBeAssignedWorking() && staff.ticksAwayFromBase <= ticksLimit && ok) {
+            if (staff.canBeAssignedWorking(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !isEMD
                 if (cantAllocate(needed, badLicense, badEMD)) {
                     continue
                 }
-                logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
+                allocatedStaff.add(staff)
                 needed = updateNeeded(needed, staff)
                 needsLicense = badLicense
                 needsEMD = badEMD
@@ -83,9 +86,19 @@ data class Hospital(
             }
         }
         if (request) {
-            return 0
+            return Pair(0, allocatedStaff)
         }
-        return allocateStaffOnCall(emergencyResponse, logger, vehicle, ticksLimit, needed, needsLicense, needsEMD)
+        return allocateStaffOnCall(
+            emergencyResponse,
+            logger,
+            vehicle,
+            ticksLimit,
+            needed,
+            needsLicense,
+            needsEMD,
+            allocatedStaff,
+            simulationData
+        )
     }
 
     private fun allocateStaffOnCall(
@@ -95,8 +108,10 @@ data class Hospital(
         ticksLimit: Int,
         needed2: Int,
         needsLicense2: Boolean,
-        needsEMD2: Boolean
-    ): Int {
+        needsEMD2: Boolean,
+        allocatedStaff: MutableList<Staff>,
+        simulationData: SimulationData
+    ): Pair<Int, MutableList<Staff>> {
         var needed = needed2
         var needsLicense = needsLicense2
         var needsEMD = needsEMD2
@@ -108,7 +123,7 @@ data class Hospital(
             } else {
                 needed > 0
             }
-            if (staff.canBeAssignedOnCall() && staff.ticksAwayFromBase <= ticksLimit && ok) {
+            if (staff.canBeAssignedOnCall(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !isEMD
                 if (cantAllocate(needed, badLicense, badEMD)) {
@@ -124,6 +139,6 @@ data class Hospital(
                 maxTicks = Math.max(maxTicks, staff.ticksAwayFromBase)
             }
         }
-        return maxTicks
+        return Pair(maxTicks, allocatedStaff)
     }
 }

@@ -3,6 +3,7 @@ package de.unisaarland.cs.se.selab.model.assets
 import de.unisaarland.cs.se.selab.controller.EmergencyResponse
 import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.Emergency
+import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.map.Node
 
 /**
@@ -53,18 +54,18 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * Check if the vehicle can be manned by this base during simulation.
      */
-    open fun canManSimulation(vehicle: Vehicle, ticksLimit: Int): Boolean {
+    open fun canManSimulation(vehicle: Vehicle, ticksLimit: Int, simulationData: SimulationData): Boolean {
         var ans: Boolean = vehicle.staffCapacity <= this.staff.count {
-            it.canBeAssigned() && it.ticksAwayFromBase <= ticksLimit
+            it.canBeAssigned(simulationData) && it.ticksAwayFromBase <= ticksLimit
         }
         if (vehicle.needsLicense) {
-            ans = ans && staff.any { it.canBeAssigned() && it.hasLicense }
+            ans = ans && staff.any { it.canBeAssigned(simulationData) && it.hasLicense }
         }
         if (vehicle.vehicleType == VehicleType.K9_POLICE_CAR) {
-            ans = ans && staff.any { it.canBeAssigned() && it.staffType == StaffType.DOG_HANDLER }
+            ans = ans && staff.any { it.canBeAssigned(simulationData) && it.staffType == StaffType.DOG_HANDLER }
         }
         if (vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR) {
-            ans = ans && staff.any { it.canBeAssigned() && it.staffType == StaffType.EMERGENCY_DOCTOR }
+            ans = ans && staff.any { it.canBeAssigned(simulationData) && it.staffType == StaffType.EMERGENCY_DOCTOR }
         }
         return ans
     }
@@ -72,18 +73,19 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * Check if the vehicle can be manned by this base during a request.
      */
-    open fun canManSimulationRequest(vehicle: Vehicle, ticksLimit: Int): Boolean {
+    open fun canManSimulationRequest(vehicle: Vehicle, ticksLimit: Int, simulationData: SimulationData): Boolean {
         var ans: Boolean = vehicle.staffCapacity <= this.staff.count {
-            it.canBeAssignedWorking() && it.ticksAwayFromBase <= ticksLimit
+            it.canBeAssignedWorking(simulationData) && it.ticksAwayFromBase <= ticksLimit
         }
         if (vehicle.needsLicense) {
-            ans = ans && staff.any { it.canBeAssignedWorking() && it.hasLicense }
+            ans = ans && staff.any { it.canBeAssignedWorking(simulationData) && it.hasLicense }
         }
         if (vehicle.vehicleType == VehicleType.K9_POLICE_CAR) {
-            ans = ans && staff.any { it.canBeAssignedWorking() && it.staffType == StaffType.DOG_HANDLER }
+            ans = ans && staff.any { it.canBeAssignedWorking(simulationData) && it.staffType == StaffType.DOG_HANDLER }
         }
         if (vehicle.vehicleType == VehicleType.EMERGENCY_DOCTOR_CAR) {
-            ans = ans && staff.any { it.canBeAssignedWorking() && it.staffType == StaffType.EMERGENCY_DOCTOR }
+            ans = ans &&
+                staff.any { it.canBeAssignedWorking(simulationData) && it.staffType == StaffType.EMERGENCY_DOCTOR }
         }
         return ans
     }
@@ -91,11 +93,16 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
     /**
      * general function for can man
      */
-    open fun canManSimulationBool(vehicle: Vehicle, ticksLimit: Int, request: Boolean): Boolean {
+    open fun canManSimulationBool(
+        vehicle: Vehicle,
+        ticksLimit: Int,
+        request: Boolean,
+        simulationData: SimulationData
+    ): Boolean {
         if (request) {
-            return canManSimulationRequest(vehicle, ticksLimit)
+            return canManSimulationRequest(vehicle, ticksLimit, simulationData)
         }
-        return canManSimulation(vehicle, ticksLimit)
+        return canManSimulation(vehicle, ticksLimit, simulationData)
     }
 
     /**
@@ -106,10 +113,11 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
         logger: Logger,
         vehicle: T,
         ticksLimit: Int,
-        request: Boolean
-    ): Int {
+        request: Boolean,
+        simulationData: SimulationData
+    ): Pair<Int, MutableList<Staff>> {
         // Do nothing by default
-        return 0
+        return Pair(0, mutableListOf())
     }
 
     /**

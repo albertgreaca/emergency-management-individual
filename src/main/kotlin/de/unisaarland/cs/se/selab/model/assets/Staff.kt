@@ -35,8 +35,11 @@ data class Staff(
     /**
      * check if the staff can be assigned at all
      */
-    fun canBeAssigned(): Boolean {
+    fun canBeAssigned(simulationData: SimulationData): Boolean {
         if (unavailable) {
+            return false
+        }
+        if (currentShift.type != simulationData.shift) {
             return false
         }
         return (currentShift.working || currentShift.onCall) && allocatedTo == null
@@ -45,8 +48,11 @@ data class Staff(
     /**
      * check if the staff can be assigned and is working this shift
      */
-    fun canBeAssignedWorking(): Boolean {
+    fun canBeAssignedWorking(simulationData: SimulationData): Boolean {
         if (unavailable) {
+            return false
+        }
+        if (currentShift.type != simulationData.shift) {
             return false
         }
         return currentShift.working && allocatedTo == null
@@ -55,8 +61,11 @@ data class Staff(
     /**
      * check if the staff can be assigned and is on call
      */
-    fun canBeAssignedOnCall(): Boolean {
+    fun canBeAssignedOnCall(simulationData: SimulationData): Boolean {
         if (unavailable) {
+            return false
+        }
+        if (currentShift.type != simulationData.shift) {
             return false
         }
         return currentShift.onCall && allocatedTo == null
@@ -232,7 +241,7 @@ data class Staff(
                 return
             }
             if (currentShift.type == simulationData.shift && !currentShift.working && nextShift.working) {
-                logger.shiftStart(name, id, currentShift.type)
+                logger.shiftStart(name, id, nextShift.type)
                 return
             }
         }

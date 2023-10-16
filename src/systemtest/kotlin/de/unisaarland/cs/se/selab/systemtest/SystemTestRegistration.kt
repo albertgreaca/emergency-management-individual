@@ -40,6 +40,6 @@ object SystemTestRegistration {
     }
 
     fun registerSystemTestsMutantSimulation(manager: SystemTestManager) {
-        manager.registerTest(ExampleTest())
+        registerSystemTestsMutantValidation(manager)
     }
 }

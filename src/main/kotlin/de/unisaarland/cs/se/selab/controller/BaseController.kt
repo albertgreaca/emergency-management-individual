@@ -40,7 +40,14 @@ class BaseController<T : Vehicle>(
         }
         var sendRequests = true
         if (potentialVehicles.isNotEmpty()) {
-            val newAssetInquiry = handleInquiry(emergencyResponse, logger, potentialVehicles, assetInquiry, false)
+            val newAssetInquiry = handleInquiry(
+                emergencyResponse,
+                logger,
+                potentialVehicles,
+                assetInquiry,
+                false,
+                simulationData
+            )
             if (assetInquiry == newAssetInquiry && emergencyResponse.allocatedAssets(simulationData).isEmpty()) {
                 sendRequests = false
             }
@@ -120,7 +127,8 @@ class BaseController<T : Vehicle>(
         logger: Logger,
         vehicles: List<T>,
         assetInquiry2: AssetInquiry,
-        request: Boolean
+        request: Boolean,
+        simulationData: SimulationData
     ): AssetInquiry {
         var potentialVehicles = vehicles
         var assetInquiry = assetInquiry2
@@ -145,7 +153,8 @@ class BaseController<T : Vehicle>(
                 base.canManSimulationBool(
                     vehicle,
                     difference,
-                    request
+                    request,
+                    simulationData
                 )
             ) {
                 vehicle.currentEmergency = emergencyResponse.emergency
@@ -153,10 +162,18 @@ class BaseController<T : Vehicle>(
                     ?: error("A route from the base to the emergency needs to exist")
                 vehicle.location = vehicle.currentRoute.start
                 vehicle.atTarget = false
-                val extra = base.allocateStaff(emergencyResponse, logger, vehicle, difference, request)
-                vehicle.manning = Math.max(1, 1 + extra)
+                var extra = base.allocateStaff(emergencyResponse, logger, vehicle, difference, request, simulationData)
+                vehicle.manning = Math.max(1, 1 + extra.first)
                 base.staffNumber -= vehicle.staffCapacity
-                logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, extra + vehicle.timeToTarget))
+                extra = Pair(extra.first, extra.second.sortedBy { it.id }.toMutableList())
+                extra.second.forEach {
+                    logger.staffAllocation(it.name, it.id, vehicle.id, emergencyResponse.emergency.id)
+                }
+                logger.allocation(
+                    vehicle.id,
+                    emergencyResponse.emergency.id,
+                    max(1, extra.first + vehicle.timeToTarget)
+                )
                 allocatedVehicles.add(vehicle)
                 assetInquiry = assetInquiry.remainingAssets(listOf(vehicle))
             }
@@ -247,7 +264,8 @@ class BaseController<T : Vehicle>(
             logger,
             base.availableVehicles.filter { vehicle -> request.assetInquiry.canHelp(vehicle) },
             request.assetInquiry,
-            true
+            true,
+            simulationData
         )
         if (remainingInquiry.isFulfilled) {
             return emptyList()
