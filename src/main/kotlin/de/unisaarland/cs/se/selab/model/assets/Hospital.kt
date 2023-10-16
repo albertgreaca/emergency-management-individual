@@ -89,8 +89,6 @@ data class Hospital(
             return Pair(0, allocatedStaff)
         }
         return allocateStaffOnCall(
-            emergencyResponse,
-            logger,
             vehicle,
             ticksLimit,
             needed,
@@ -102,8 +100,6 @@ data class Hospital(
     }
 
     private fun allocateStaffOnCall(
-        emergencyResponse: EmergencyResponse,
-        logger: Logger,
         vehicle: Ambulance,
         ticksLimit: Int,
         needed2: Int,
@@ -129,7 +125,7 @@ data class Hospital(
                 if (cantAllocate(needed, badLicense, badEMD)) {
                     continue
                 }
-                logger.staffAllocation(staff.name, staff.id, vehicle.id, emergencyResponse.emergency.id)
+                allocatedStaff.add(staff)
                 needed = updateNeeded(needed, staff)
                 needsLicense = badLicense
                 needsEMD = badEMD

@@ -96,8 +96,8 @@ data class PoliceStation(
 
     private fun allocateStaffOnCall(
         vehicle: PoliceVehicle,
-        ticksLimit: Int,
         needed2: Int,
+        ticksLimit: Int,
         needsLicense2: Boolean,
         needsDogH2: Boolean,
         allocatedStaff: MutableList<Staff>,
