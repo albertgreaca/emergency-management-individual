@@ -19,12 +19,13 @@ data class FireStation(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicle: FireTruck,
+        ticksLimit: Int,
         request: Boolean
     ): Int {
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         for (staff in fireStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking() && needed > 0) {
+            if (staff.canBeAssignedWorking() && staff.ticksAwayFromBase <= ticksLimit && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 if (needed == 1 && badLicense) {
                     continue
@@ -39,13 +40,14 @@ data class FireStation(
         if (request) {
             return 0
         }
-        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense)
+        return allocateStaffOnCall(emergencyResponse, logger, vehicle, ticksLimit, needed, needsLicense)
     }
 
     private fun allocateStaffOnCall(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicle: FireTruck,
+        ticksLimit: Int,
         needed2: Int,
         needsLicense2: Boolean,
     ): Int {
@@ -53,7 +55,7 @@ data class FireStation(
         var needsLicense = needsLicense2
         var maxTicks = 0
         for (staff in fireStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall() && needed > 0) {
+            if (staff.canBeAssignedOnCall() && staff.ticksAwayFromBase <= ticksLimit && needed > 0) {
                 val badLicense = needsLicense && !staff.hasLicense
                 if (needed == 1 && badLicense) {
                     continue

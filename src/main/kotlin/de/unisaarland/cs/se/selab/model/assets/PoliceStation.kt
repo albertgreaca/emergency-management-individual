@@ -55,6 +55,7 @@ data class PoliceStation(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicle: PoliceVehicle,
+        ticksLimit: Int,
         request: Boolean
     ): Int {
         var needed: Int = vehicle.staffCapacity
@@ -64,7 +65,8 @@ data class PoliceStation(
             dogNumber--
         }
         for (staff in policeStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking() && (needed > 0 || needsDogH)) {
+            val ok = needed > 0 || needsDogH
+            if (staff.canBeAssignedWorking() && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !(staff.staffType == StaffType.DOG_HANDLER)
                 if (cantAllocate(needed, badLicense, badDH)) {
@@ -81,13 +83,14 @@ data class PoliceStation(
         if (request) {
             return 0
         }
-        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense, needsDogH)
+        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, ticksLimit, needsLicense, needsDogH)
     }
 
     private fun allocateStaffOnCall(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicle: PoliceVehicle,
+        ticksLimit: Int,
         needed2: Int,
         needsLicense2: Boolean,
         needsDogH2: Boolean
@@ -97,7 +100,8 @@ data class PoliceStation(
         var needsDogH = needsDogH2
         var maxTicks = 0
         for (staff in policeStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall() && (needed > 0 || needsDogH)) {
+            val ok = needed > 0 || needsDogH
+            if (staff.canBeAssignedOnCall() && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !(staff.staffType == StaffType.DOG_HANDLER)
                 if (cantAllocate(needed, badLicense, badDH)) {

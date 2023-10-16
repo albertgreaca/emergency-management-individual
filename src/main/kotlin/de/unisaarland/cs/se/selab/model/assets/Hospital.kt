@@ -52,6 +52,7 @@ data class Hospital(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicle: Ambulance,
+        ticksLimit: Int,
         request: Boolean
     ): Int {
         var needed: Int = vehicle.staffCapacity
@@ -61,7 +62,8 @@ data class Hospital(
             doctorNumber--
         }
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedWorking() && (needed > 0 || needsEMD)) {
+            val ok = needed > 0 || needsEMD
+            if (staff.canBeAssignedWorking() && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
                 if (cantAllocate(needed, badLicense, badEMD)) {
@@ -78,13 +80,14 @@ data class Hospital(
         if (request) {
             return 0
         }
-        return allocateStaffOnCall(emergencyResponse, logger, vehicle, needed, needsLicense, needsEMD)
+        return allocateStaffOnCall(emergencyResponse, logger, vehicle, ticksLimit, needed, needsLicense, needsEMD)
     }
 
     private fun allocateStaffOnCall(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicle: Ambulance,
+        ticksLimit: Int,
         needed2: Int,
         needsLicense2: Boolean,
         needsEMD2: Boolean
@@ -94,7 +97,8 @@ data class Hospital(
         var needsEMD = needsEMD2
         var maxTicks = 0
         for (staff in hospitalStaff.sortedBy { it.id }) {
-            if (staff.canBeAssignedOnCall() && (needed > 0 || needsEMD)) {
+            val ok = needed > 0 || needsEMD
+            if (staff.canBeAssignedOnCall() && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badEMD = needsEMD && !(staff.staffType == StaffType.EMERGENCY_DOCTOR)
                 if (cantAllocate(needed, badLicense, badEMD)) {

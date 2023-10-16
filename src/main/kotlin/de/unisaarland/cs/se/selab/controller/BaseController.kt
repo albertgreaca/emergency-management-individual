@@ -135,15 +135,16 @@ class BaseController<T : Vehicle>(
         }
         val allocatedVehicles: MutableList<T> = mutableListOf()
         for (vehicle in potentialVehicles.sortedBy { it.id }) {
+            val difference = emergencyResponse.maxTravelTime - ceil(
+                (potentialRoutes[vehicle.vehicleHeight]?.length ?: error("route needs to exist")) /
+                    SPEED.toDouble()
+            ).toInt()
             if (
                 assetInquiry.isFulfillable(vehicle) &&
                 assetInquiry.canHelp(vehicle) &&
                 base.canManSimulationBool(
                     vehicle,
-                    emergencyResponse.maxTravelTime - ceil(
-                        (potentialRoutes[vehicle.vehicleHeight]?.length ?: error("route needs to exist")) /
-                            SPEED.toDouble()
-                    ).toInt(),
+                    difference,
                     request
                 )
             ) {
@@ -152,7 +153,7 @@ class BaseController<T : Vehicle>(
                     ?: error("A route from the base to the emergency needs to exist")
                 vehicle.location = vehicle.currentRoute.start
                 vehicle.atTarget = false
-                val extra = base.allocateStaff(emergencyResponse, logger, vehicle, request)
+                val extra = base.allocateStaff(emergencyResponse, logger, vehicle, difference, request)
                 vehicle.manning = Math.max(1, 1 + extra)
                 base.staffNumber -= vehicle.staffCapacity
                 logger.allocation(vehicle.id, emergencyResponse.emergency.id, max(1, extra + vehicle.timeToTarget))
