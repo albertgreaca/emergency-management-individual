@@ -1,5 +1,6 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.assets.Staff
 
 /**
@@ -15,7 +16,7 @@ class SicknessEvent(
     override var isDone: Boolean = false
     var affectedStaffs: List<Staff> = emptyList()
 
-    override fun trigger(simulationData: SimulationData): Boolean {
+    override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
         affectedStaffs = simulationData.staff.filter { it.ticksSpentAtEmergencies >= minTicks }
         if (affectedStaffs.isEmpty()) {
             tick++
@@ -30,6 +31,10 @@ class SicknessEvent(
                 requireNotNull(it.allocatedTo).returnB = true
             }
             it.ticksSick = duration
+            if (it.lastTickWorked) {
+                logger.numberTicksWorked--
+                it.workedTicksThisShift--
+            }
             it.setReturningHome()
         }
         return true

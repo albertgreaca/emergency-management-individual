@@ -31,7 +31,8 @@ data class Staff(
     var atHome: Boolean = false,
     var returningToBase: Boolean = false,
     var workedTicksThisShift: Int = 0,
-    var wasUnavailable: Boolean = false
+    var wasUnavailable: Boolean = false,
+    var lastTickWorked: Boolean = false
 ) {
 
     var outputLog: Boolean = false
@@ -46,7 +47,7 @@ data class Staff(
         if (currentShift.type != simulationData.shift) {
             return false
         }
-        val ok = currentShift.working && atBase
+        val ok = currentShift.working && (atBase || (returningToBase && ticksAwayFromBase == 0))
         return (ok || currentShift.onCall) && allocatedTo == null
     }
 
@@ -60,7 +61,8 @@ data class Staff(
         if (currentShift.type != simulationData.shift) {
             return false
         }
-        return currentShift.working && atBase && allocatedTo == null
+        val ok = currentShift.working && (atBase || (returningToBase && ticksAwayFromBase == 0))
+        return ok && allocatedTo == null
     }
 
     /**
@@ -192,11 +194,13 @@ data class Staff(
      * counts working ticks
      */
     fun countTicks(logger: Logger) {
+        lastTickWorked = false
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
             val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
             if (!em.handlingStarted || !(em.handlingTime == 1)) {
                 logger.numberTicksWorked++
                 workedTicksThisShift++
+                lastTickWorked = true
             }
         }
         if (unavailable) {
@@ -218,6 +222,7 @@ data class Staff(
     fun updateAndCount(logger: Logger, simulationData: SimulationData) {
         increaseSpentEmergency()
         countTicks(logger)
+        updateWhereGoing(simulationData)
         updatePosition()
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
             if (currentShift.type == simulationData.shift && currentShift.working && !wasUnavailable) {
@@ -232,13 +237,27 @@ data class Staff(
             }
             updateShifts(simulationData.shift)
         }
+    }
+
+    /**
+     * updates where staff member goes
+     */
+    fun updateWhereGoing(simulationData: SimulationData) {
         if (currentShift.type != simulationData.shift) {
+            if (
+                currentShift.working &&
+                simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength &&
+                !unavailable
+            ) {
+                setReturningToBase()
+                return
+            }
             setReturningHome()
             return
         }
         if (
             nextShift.working &&
-            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength - 1 &&
+            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength &&
             !unavailable
         ) {
             setReturningToBase()

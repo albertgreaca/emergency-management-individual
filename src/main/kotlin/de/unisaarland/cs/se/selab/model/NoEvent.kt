@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
+
 /**
  * Class representing no actual event.
  */
@@ -9,7 +11,7 @@ data class NoEvent(
     override val id: Int = -1
 ) : RoadEvent() {
     override var isDone: Boolean = false
-    override fun trigger(simulationData: SimulationData): Boolean {
+    override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
         return false
     }
 

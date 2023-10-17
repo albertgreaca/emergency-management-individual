@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
+
 /**
  * This event signals that the resource with the given [id][resourceId] is unavailable
  * for some [duration]
@@ -17,7 +19,7 @@ class VehicleUnavailable(
 ) : Event {
 
     override var isDone: Boolean = false
-    override fun trigger(simulationData: SimulationData): Boolean {
+    override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
         val affectedVehicle = simulationData.vehicles.find { it.id == resourceId } ?: error(
             "Vehicle for Vehicle" +
                 " Unavailable event not found"

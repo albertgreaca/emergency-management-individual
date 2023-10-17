@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
+
 /**
  * Superclass for all events.
  */
@@ -12,7 +14,7 @@ interface Event {
     /**
      * Triggers the event.
      */
-    fun trigger(simulationData: SimulationData): Boolean
+    fun trigger(simulationData: SimulationData, logger: Logger): Boolean
 
     /**
      * Updates the event.

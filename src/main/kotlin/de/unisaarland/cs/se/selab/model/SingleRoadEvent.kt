@@ -1,5 +1,6 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.map.Road
 
 /**
@@ -8,7 +9,7 @@ import de.unisaarland.cs.se.selab.model.map.Road
 sealed class SingleRoadEvent(val road: Road) : RoadEvent() {
 
     override var isDone = false
-    override fun trigger(simulationData: SimulationData): Boolean {
+    override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
         return when (road.activeEvent) {
             is NoEvent -> {
                 road.activeEvent = this

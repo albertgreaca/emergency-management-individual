@@ -33,7 +33,7 @@ class EventHandler(val events: Collection<Event>, private val simulationData: Si
     fun activateEvents(logger: Logger): Boolean {
         var eventStarted = false
         for (event in newEvents) {
-            val triggered = event.trigger(simulationData)
+            val triggered = event.trigger(simulationData, logger)
             if (triggered) {
                 logger.eventTriggered(event.id)
                 eventStarted = event is RoadEvent

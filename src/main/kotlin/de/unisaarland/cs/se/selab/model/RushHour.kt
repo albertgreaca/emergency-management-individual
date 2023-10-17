@@ -1,5 +1,6 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.map.Road
 import de.unisaarland.cs.se.selab.parser.PrimaryStreetType
 
@@ -31,7 +32,7 @@ class RushHour(
 
     override var isDone: Boolean = false
 
-    override fun trigger(simulationData: SimulationData): Boolean {
+    override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
         val affectedRoads = simulationData.simulationMap.edges().filter { road ->
             road.primaryType in roadTypes
         }

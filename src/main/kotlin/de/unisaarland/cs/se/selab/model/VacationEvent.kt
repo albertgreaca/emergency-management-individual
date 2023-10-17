@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.logger.Logger
+
 /**
  * Event for staff being on vacation
  */
@@ -12,7 +14,7 @@ class VacationEvent(
 
     override var isDone: Boolean = false
 
-    override fun trigger(simulationData: SimulationData): Boolean {
+    override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
         val affectedStaff = simulationData.staff.find { it.id == staffId } ?: error(
             "Staff for vacation event not found"
         )
