@@ -18,6 +18,12 @@ data class Shift(
          * first shift according to the json object
          */
         fun createCurrentShift(json: JSONObject): Shift {
+            if (
+                ShiftType.valueOf(json.getString(JsonKeys.SHIFT)) == ShiftType.NIGHT &&
+                json.getBoolean(JsonKeys.ON_CALL)
+            ) {
+                return Shift(ShiftType.EARLY, false, true)
+            }
             return Shift(ShiftType.valueOf(json.getString(JsonKeys.SHIFT)), true, false)
         }
 
@@ -26,6 +32,12 @@ data class Shift(
          * second shift according to the json object
          */
         fun createNextShift(json: JSONObject): Shift {
+            if (
+                ShiftType.valueOf(json.getString(JsonKeys.SHIFT)) == ShiftType.NIGHT &&
+                json.getBoolean(JsonKeys.ON_CALL)
+            ) {
+                return Shift(ShiftType.LATE, false, false)
+            }
             if (json.getBoolean(JsonKeys.DOUBLE_SHIFT)) {
                 return Shift(ShiftType.valueOf(json.getString(JsonKeys.SHIFT)).getNext(), true, false)
             }
