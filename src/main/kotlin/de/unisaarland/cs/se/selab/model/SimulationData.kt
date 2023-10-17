@@ -44,4 +44,11 @@ data class SimulationData(
         nextRequestId++
         return currentRequestId
     }
+
+    /**
+     * finds base with given id
+     */
+    fun findBase(id: Int): Base<*> {
+        return requireNotNull(bases.find { it.id == id })
+    }
 }

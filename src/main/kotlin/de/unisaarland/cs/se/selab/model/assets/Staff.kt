@@ -21,6 +21,10 @@ data class Staff(
     val hasLicense: Boolean,
     var allocatedTo: Vehicle? = null,
     var unavailable: Boolean = false,
+    var isSick: Boolean = false,
+    var ticksSick: Int = 0,
+    var logSick: Boolean = false,
+    var logAvailable: Boolean = false,
     var ticksSpentAtEmergencies: Int = 0,
     var atBase: Boolean = true,
     var goingHome: Boolean = false,
@@ -199,10 +203,19 @@ data class Staff(
         }
     }
 
+    private fun increaseSpentEmergency() {
+        if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
+            if (requireNotNull(allocatedTo).atTarget) {
+                ticksSpentAtEmergencies++
+            }
+        }
+    }
+
     /**
      * updates a staff member's position, shifts and booleans
      */
     fun updateAndCount(logger: Logger, simulationData: SimulationData) {
+        increaseSpentEmergency()
         countTicks(logger)
         updatePosition()
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {

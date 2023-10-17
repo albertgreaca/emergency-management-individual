@@ -16,7 +16,7 @@ class VacationEvent(
         val affectedStaff = simulationData.staff.find { it.id == staffId } ?: error(
             "Staff for vacation event not found"
         )
-        if (affectedStaff.allocatedTo != null) {
+        if (affectedStaff.allocatedTo != null || affectedStaff.ticksAwayFromBase != 0) {
             tick++
             return false
         }

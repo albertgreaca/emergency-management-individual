@@ -191,11 +191,31 @@ class Simulation(
         val eventsEnded = eventHandler.update(logger)
         val eventActivated = eventHandler.activateEvents(logger)
         activeEmergencies.forEach { it.emergency.road.pauseEvent() }
+        updateSick()
         val recalculateRoutes = eventsEnded || eventActivated
         if (recalculateRoutes) {
             reRouteAssets()
         }
     }
+
+    private fun updateSick() {
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            if (staff.logSick) {
+                logger.staffSick(staff.name, staff.id, staff.ticksSick)
+                staff.logSick = false
+            }
+        }
+        for (staff in simulationData.staff.sortedBy { it.id }) {
+            if (staff.logAvailable) {
+                logger.staffAvailable(staff.name, staff.id)
+                staff.logAvailable = false
+            }
+        }
+        for (vehicle in simulationData.vehicles.sortedBy { it.id }) {
+            vehicle.returnToBase(navigation, logger)
+        }
+    }
+
     companion object {
         const val shiftLength = 10
         const val shiftEnd = 9

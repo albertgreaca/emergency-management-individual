@@ -1,5 +1,7 @@
 package de.unisaarland.cs.se.selab.model
 
+import de.unisaarland.cs.se.selab.model.assets.Staff
+
 /**
  * class for staff sickness event
  */
@@ -11,17 +13,35 @@ class SicknessEvent(
 ) : Event {
 
     override var isDone: Boolean = false
+    var affectedStaffs: List<Staff> = emptyList()
 
     override fun trigger(simulationData: SimulationData): Boolean {
-        // TODO actually implement this blin
-        if (minTicks > 0) {
-            return true
-        } else {
+        affectedStaffs = simulationData.staff.filter { it.ticksSpentAtEmergencies >= minTicks }
+        if (affectedStaffs.isEmpty()) {
+            tick++
             return false
         }
+        affectedStaffs.forEach {
+            it.unavailable = true
+            it.isSick = true
+            it.logSick = true
+            it.wasUnavailable = true
+            if (it.allocatedTo != null) {
+                requireNotNull(it.allocatedTo).returnB = true
+            }
+            it.ticksSick = duration
+        }
+        return true
     }
 
     override fun update(simulationData: SimulationData) {
-        return
+        if (tick + duration <= simulationData.tick) {
+            isDone = true
+            affectedStaffs.forEach {
+                it.unavailable = false
+                it.isSick = false
+                it.logAvailable = true
+            }
+        }
     }
 }

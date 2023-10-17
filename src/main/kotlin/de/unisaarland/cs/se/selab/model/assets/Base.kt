@@ -36,7 +36,7 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
                                 !it.atTarget &&
                                 (it.currentEmergency?.severity ?: 0) < emergency.severity
                             )
-                    )
+                    ) && !it.assignedStaff.any { it2 -> it2.isSick }
         }
             .sortedBy { it.id }
     }

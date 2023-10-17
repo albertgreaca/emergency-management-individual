@@ -1,10 +1,13 @@
 package de.unisaarland.cs.se.selab.model.assets
 
+import de.unisaarland.cs.se.selab.controller.Navigation
+import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.Emergency
 import de.unisaarland.cs.se.selab.model.map.Location
 import de.unisaarland.cs.se.selab.model.map.Route
 import de.unisaarland.cs.se.selab.model.map.TargetReached
 import kotlin.math.ceil
+import kotlin.math.max
 import kotlin.math.min
 
 const val SPEED = 10
@@ -34,6 +37,7 @@ interface Vehicle {
     var manning: Int
     val assignedStaff: MutableList<Staff>
     val needsLicense: Boolean
+    var returnB: Boolean
 
     val target: Location
         get() = currentEmergency?.road ?: home
@@ -86,4 +90,24 @@ interface Vehicle {
      * Handles the restoration of the specialCapacity.
      */
     fun restore()
+
+    /**
+     * returns the vehicle to its base when a staff member gets sick
+     */
+    fun returnToBase(navigation: Navigation, logger: Logger) {
+        if (!returnB || (currentEmergency != null && requireNotNull(currentEmergency).handlingStarted)) {
+            return
+        }
+        currentRoute = navigation.shortestRoute(location, navigation.simulationData.findBase(baseID).location, this)
+        for (staff in assignedStaff) {
+            if (staff.isSick) {
+                logger.assetAllocationCanceled(id, requireNotNull(currentEmergency).id, staff.name, staff.id)
+                break
+            }
+        }
+        logger.assetReturn(id, max(1, timeToTarget))
+        currentEmergency = null
+        manning = 0
+        returnB = false
+    }
 }

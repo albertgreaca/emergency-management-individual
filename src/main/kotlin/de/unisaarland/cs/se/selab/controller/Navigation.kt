@@ -19,7 +19,7 @@ import de.unisaarland.cs.se.selab.util.Success
 /**
  * Class to handle the shortest route calculations.
  */
-class Navigation(private val simulationData: SimulationData) {
+class Navigation(val simulationData: SimulationData) {
     /**
      * Calculate the shortest route from [start] to [target] using the constraints of [vehicle] if given.
      * @param start The source [Location].
