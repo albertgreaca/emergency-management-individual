@@ -30,6 +30,7 @@ class SicknessEvent(
                 requireNotNull(it.allocatedTo).returnB = true
             }
             it.ticksSick = duration
+            it.setReturningHome()
         }
         return true
     }

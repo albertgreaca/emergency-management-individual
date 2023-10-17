@@ -46,7 +46,8 @@ data class Staff(
         if (currentShift.type != simulationData.shift) {
             return false
         }
-        return (currentShift.working || currentShift.onCall) && allocatedTo == null
+        val ok = currentShift.working && atBase
+        return (ok || currentShift.onCall) && allocatedTo == null
     }
 
     /**
@@ -59,7 +60,7 @@ data class Staff(
         if (currentShift.type != simulationData.shift) {
             return false
         }
-        return currentShift.working && allocatedTo == null
+        return currentShift.working && atBase && allocatedTo == null
     }
 
     /**
@@ -237,7 +238,7 @@ data class Staff(
         }
         if (
             nextShift.working &&
-            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase >= Simulation.shiftLength &&
+            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength - 1 &&
             !unavailable
         ) {
             setReturningToBase()
