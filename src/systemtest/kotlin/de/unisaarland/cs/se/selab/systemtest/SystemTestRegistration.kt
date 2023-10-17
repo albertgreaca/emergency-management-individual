@@ -4,12 +4,15 @@ import de.unisaarland.cs.se.selab.systemtest.basictests.ExampleTest
 import de.unisaarland.cs.se.selab.systemtest.runner.SystemTestManager
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.DOGHANDLERwithMOTORCYCLE
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.DOGHANDLERwithTRUCK
+import de.unisaarland.cs.se.selab.systemtest.validationMutants.DoctorsNotMatching
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.DoubleShiftOnCall
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.EMERGENCYDOCTORwithMOTORCYCLE
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.EMERGENCYDOCTORwithTRUCK
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.EMTwithMOTORCYCLE
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.EMTwithTRUCK
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.FIREFIGHTERwithMOTORCYCLE
+import de.unisaarland.cs.se.selab.systemtest.validationMutants.IdNotUnique
+import de.unisaarland.cs.se.selab.systemtest.validationMutants.NoLicenseFireBase
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.POLICEOFFICERwithTRUCK
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingFireStation
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingHospital
@@ -37,6 +40,9 @@ object SystemTestRegistration {
         manager.registerTest(EMTwithMOTORCYCLE())
         manager.registerTest(EMERGENCYDOCTORwithMOTORCYCLE())
         manager.registerTest(DOGHANDLERwithMOTORCYCLE())
+        manager.registerTest(NoLicenseFireBase())
+        manager.registerTest(DoctorsNotMatching())
+        manager.registerTest(IdNotUnique())
     }
 
     fun registerSystemTestsMutantSimulation(manager: SystemTestManager) {
