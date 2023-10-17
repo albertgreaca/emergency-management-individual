@@ -218,14 +218,19 @@ data class Staff(
             }
             updateShifts(simulationData.shift)
         }
+        if (currentShift.type != simulationData.shift) {
+            setReturningHome()
+            return
+        }
         if (
             nextShift.working &&
             simulationData.tick % Simulation.shiftLength + ticksAwayFromBase >= Simulation.shiftLength &&
             !unavailable
         ) {
             setReturningToBase()
+            return
         }
-        if (currentShift.onCall) {
+        if (!currentShift.working) {
             setReturningHome()
         }
     }
