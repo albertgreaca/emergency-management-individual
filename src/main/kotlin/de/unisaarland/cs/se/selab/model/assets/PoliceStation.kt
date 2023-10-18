@@ -66,10 +66,6 @@ data class PoliceStation(
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         var needsDogH: Boolean = vehicle.vehicleType == VehicleType.K9_POLICE_CAR
-        // kLogger.error {
-        //    "vehicle with id ${vehicle.id} and type ${vehicle.vehicleType} has needs" +
-        //        " license = $needsLicense and needs dog handler = $needsDogH"
-        // }
         if (vehicle.vehicleType == VehicleType.K9_POLICE_CAR) {
             dogNumber--
         }
@@ -80,7 +76,6 @@ data class PoliceStation(
             } else {
                 needed > 0
             }
-            // kLogger.error { "staff member with id ${staff.id} has isdogh = $isdogh and ok = $ok" }
             if (staff.canBeAssignedWorking(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !isdogh
@@ -121,7 +116,6 @@ data class PoliceStation(
             } else {
                 needed > 0
             }
-            // kLogger.error { "staff member with id ${staff.id} has isdogh = $isdogh and ok = $ok" }
             if (staff.canBeAssignedOnCall(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !isdogh

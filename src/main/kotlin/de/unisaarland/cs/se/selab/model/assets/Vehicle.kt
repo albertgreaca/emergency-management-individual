@@ -101,7 +101,9 @@ interface Vehicle {
         currentRoute = navigation.shortestRoute(location, navigation.simulationData.findBase(baseID).location, this)
         for (staff in assignedStaff) {
             if (staff.isSick) {
-                logger.assetAllocationCanceled(id, requireNotNull(currentEmergency).id, staff.name, staff.id)
+                if (currentEmergency != null) {
+                    logger.assetAllocationCanceled(id, requireNotNull(currentEmergency).id, staff.name, staff.id)
+                }
                 break
             }
         }
