@@ -45,10 +45,14 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
      * Check if the vehicle can be manned by this base during parsing.
      */
     open fun canMan(vehicle: Vehicle): Boolean {
-        if (vehicle.needsLicense) {
-            return vehicle.staffCapacity <= this.staffNumber && staff.any { it.hasLicense }
+        val cnt = this.staff.count {
+            val ok = it.staffType != StaffType.DOG_HANDLER && it.staffType != StaffType.EMERGENCY_DOCTOR
+            ok
         }
-        return vehicle.staffCapacity <= this.staffNumber
+        if (vehicle.needsLicense) {
+            return vehicle.staffCapacity <= cnt && staff.any { it.hasLicense }
+        }
+        return vehicle.staffCapacity <= cnt
     }
 
     /**
@@ -56,7 +60,8 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
      */
     open fun canManSimulation(vehicle: Vehicle, ticksLimit: Int, simulationData: SimulationData): Boolean {
         var ans: Boolean = vehicle.staffCapacity <= this.staff.count {
-            it.canBeAssigned(simulationData) && it.ticksAwayFromBase <= ticksLimit
+            val ok = it.staffType != StaffType.DOG_HANDLER && it.staffType != StaffType.EMERGENCY_DOCTOR
+            it.canBeAssigned(simulationData) && it.ticksAwayFromBase <= ticksLimit && ok
         }
         if (vehicle.needsLicense) {
             ans = ans && staff.any { it.canBeAssigned(simulationData) && it.hasLicense }
@@ -75,7 +80,8 @@ sealed class Base<T : Vehicle>(val vehicles: List<T>, val staff: List<Staff>) {
      */
     open fun canManSimulationRequest(vehicle: Vehicle, ticksLimit: Int, simulationData: SimulationData): Boolean {
         var ans: Boolean = vehicle.staffCapacity <= this.staff.count {
-            it.canBeAssignedWorking(simulationData) && it.ticksAwayFromBase <= ticksLimit
+            val ok = it.staffType != StaffType.DOG_HANDLER && it.staffType != StaffType.EMERGENCY_DOCTOR
+            it.canBeAssignedWorking(simulationData) && it.ticksAwayFromBase <= ticksLimit && ok
         }
         if (vehicle.needsLicense) {
             ans = ans && staff.any { it.canBeAssignedWorking(simulationData) && it.hasLicense }
