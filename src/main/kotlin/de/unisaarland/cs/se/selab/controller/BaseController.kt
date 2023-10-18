@@ -172,7 +172,7 @@ class BaseController<T : Vehicle>(
                 logger.allocation(
                     vehicle.id,
                     emergencyResponse.emergency.id,
-                    max(1, extra.first + vehicle.timeToTarget)
+                    max(1, vehicle.timeToTarget) + extra.first
                 )
                 allocatedVehicles.add(vehicle)
                 assetInquiry = assetInquiry.remainingAssets(listOf(vehicle))
