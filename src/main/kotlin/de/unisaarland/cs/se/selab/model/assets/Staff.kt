@@ -243,27 +243,42 @@ data class Staff(
      * updates where staff member goes
      */
     fun updateWhereGoing(simulationData: SimulationData) {
+        if (unavailable) {
+            return
+        }
         if (currentShift.type != simulationData.shift) {
             if (
                 currentShift.working &&
-                simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength &&
-                !unavailable
+                simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength
             ) {
                 setReturningToBase()
                 return
             }
-            setReturningHome()
+            if (
+                !currentShift.working ||
+                !(currentShift.type != ShiftType.LATE) ||
+                2 * (ticksHome - ticksAwayFromBase) + 1 + simulationData.tick % Simulation.shiftLength <=
+                Simulation.shiftLength
+            ) {
+                setReturningHome()
+            }
             return
         }
         if (
             nextShift.working &&
-            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength &&
-            !unavailable
+            simulationData.tick % Simulation.shiftLength + ticksAwayFromBase == Simulation.shiftLength
         ) {
             setReturningToBase()
             return
         }
-        if (!currentShift.working) {
+        if (
+            !currentShift.working &&
+            (
+                !nextShift.working ||
+                    2 * (ticksHome - ticksAwayFromBase) + 1 + simulationData.tick % Simulation.shiftLength <=
+                    Simulation.shiftLength
+                )
+        ) {
             setReturningHome()
         }
     }

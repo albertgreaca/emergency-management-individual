@@ -4,7 +4,6 @@ import de.unisaarland.cs.se.selab.controller.EmergencyResponse
 import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.SimulationData
 import de.unisaarland.cs.se.selab.model.map.Node
-import io.github.oshai.kotlinlogging.KotlinLogging
 
 /**
  * A police station.
@@ -18,7 +17,7 @@ data class PoliceStation(
     val policeStaff: List<Staff>
 ) : Base<PoliceVehicle>(cars, policeStaff) {
 
-    private val kLogger = KotlinLogging.logger {}
+    // private val kLogger = KotlinLogging.logger {}
     override fun canMan(vehicle: Vehicle): Boolean {
         return super.canMan(vehicle) &&
             vehicle is PoliceVehicle && (vehicle.vehicleType != VehicleType.K9_POLICE_CAR || this.dogNumber > 0)
@@ -67,10 +66,10 @@ data class PoliceStation(
         var needed: Int = vehicle.staffCapacity
         var needsLicense: Boolean = vehicle.needsLicense
         var needsDogH: Boolean = vehicle.vehicleType == VehicleType.K9_POLICE_CAR
-        kLogger.error {
-            "vehicle with id ${vehicle.id} and type ${vehicle.vehicleType} has needs" +
-                " license = $needsLicense and needs dog handler = $needsDogH"
-        }
+        // kLogger.error {
+        //    "vehicle with id ${vehicle.id} and type ${vehicle.vehicleType} has needs" +
+        //        " license = $needsLicense and needs dog handler = $needsDogH"
+        // }
         if (vehicle.vehicleType == VehicleType.K9_POLICE_CAR) {
             dogNumber--
         }
@@ -81,7 +80,7 @@ data class PoliceStation(
             } else {
                 needed > 0
             }
-            kLogger.error { "staff member with id ${staff.id} has isdogh = $isdogh and ok = $ok" }
+            // kLogger.error { "staff member with id ${staff.id} has isdogh = $isdogh and ok = $ok" }
             if (staff.canBeAssignedWorking(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !isdogh
@@ -122,7 +121,7 @@ data class PoliceStation(
             } else {
                 needed > 0
             }
-            kLogger.error { "staff member with id ${staff.id} has isdogh = $isdogh and ok = $ok" }
+            // kLogger.error { "staff member with id ${staff.id} has isdogh = $isdogh and ok = $ok" }
             if (staff.canBeAssignedOnCall(simulationData) && staff.ticksAwayFromBase <= ticksLimit && ok) {
                 val badLicense = needsLicense && !staff.hasLicense
                 val badDH = needsDogH && !isdogh
