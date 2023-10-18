@@ -227,8 +227,7 @@ data class Staff(
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
             if (currentShift.type == simulationData.shift && currentShift.working && !wasUnavailable) {
                 logger.numberShiftsWorked++
-            }
-            if (
+            } else if (
                 currentShift.type == simulationData.shift &&
                 workedTicksThisShift == Simulation.shiftLength
             ) {
