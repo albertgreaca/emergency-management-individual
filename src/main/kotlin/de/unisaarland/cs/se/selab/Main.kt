@@ -3,6 +3,7 @@ package de.unisaarland.cs.se.selab
 import de.unisaarland.cs.se.selab.controller.Simulation
 import de.unisaarland.cs.se.selab.logger.Logger
 import de.unisaarland.cs.se.selab.model.WorldDataBuilder
+import de.unisaarland.cs.se.selab.model.assets.ShiftType
 import de.unisaarland.cs.se.selab.model.map.MapBuilder
 import de.unisaarland.cs.se.selab.parser.MapLexer
 import de.unisaarland.cs.se.selab.parser.MapParser
@@ -85,6 +86,13 @@ private fun runSimulation(
             // Parse Scenario
             simulationBuilder.bases = assets.third
             simulationBuilder.staff = assets.second
+            for (staff in simulationBuilder.staff) {
+                if (!staff.currentShift.working || staff.currentShift.type != ShiftType.EARLY) {
+                    staff.atHome = true
+                    staff.atBase = false
+                    staff.ticksAwayFromBase = staff.ticksHome
+                }
+            }
             simulationBuilder.vehicles = assets.first
             logger.initialization(scenario) { scenario ->
                 ScenarioParser(simulationBuilder.simulationData).parse(scenario)

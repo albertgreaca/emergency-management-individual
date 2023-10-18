@@ -24,7 +24,19 @@ class VacationEvent(
         }
         affectedStaff.unavailable = true
         affectedStaff.ticksSpentAtEmergencies = 0
-        affectedStaff.setReturningHome()
+
+        val working = affectedStaff.currentShift.type == simulationData.shift && affectedStaff.currentShift.working
+        val workingDoubleShift = affectedStaff.currentShift.type == simulationData.shift &&
+            affectedStaff.currentShift.working &&
+            affectedStaff.nextShift.working
+
+        val okInCaseWorking = !working || simulationData.tick % shiftLength + duration > shiftEnd
+        val okInCaseDoubleShift = !workingDoubleShift ||
+            simulationData.tick % shiftLength + duration > shiftLength + shiftEnd
+
+        if (okInCaseWorking && okInCaseDoubleShift) {
+            affectedStaff.setReturningHome()
+        }
         return true
     }
 

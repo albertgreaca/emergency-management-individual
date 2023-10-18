@@ -230,7 +230,6 @@ data class Staff(
             }
             if (
                 currentShift.type == simulationData.shift &&
-                currentShift.onCall &&
                 workedTicksThisShift == Simulation.shiftLength
             ) {
                 logger.numberShiftsWorked++
@@ -271,8 +270,10 @@ data class Staff(
             setReturningToBase()
             return
         }
+        val endOfWorkShift = !currentShift.working ||
+            simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd
         if (
-            !currentShift.working &&
+            endOfWorkShift &&
             (
                 !nextShift.working ||
                     2 * (ticksHome - ticksAwayFromBase) + 1 + simulationData.tick % Simulation.shiftLength <=
