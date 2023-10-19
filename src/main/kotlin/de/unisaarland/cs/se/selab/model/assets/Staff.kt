@@ -193,15 +193,12 @@ data class Staff(
     /**
      * counts working ticks
      */
-    fun countTicks(logger: Logger, simulationData: SimulationData) {
+    fun countTicks(logger: Logger) {
         lastTickWorked = false
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
-            val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
-            if ((!em.handlingStarted || !(em.handlingTime == 1)) && simulationData.tick < simulationData.maxTicks - 1) {
-                logger.numberTicksWorked++
-                workedTicksThisShift++
-                lastTickWorked = true
-            }
+            logger.numberTicksWorked++
+            workedTicksThisShift++
+            lastTickWorked = true
         }
         if (unavailable) {
             wasUnavailable = true
@@ -222,7 +219,7 @@ data class Staff(
      */
     fun updateAndCount(logger: Logger, simulationData: SimulationData) {
         increaseSpentEmergency()
-        countTicks(logger, simulationData)
+        countTicks(logger)
         updateWhereGoing(simulationData)
         updatePosition()
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {

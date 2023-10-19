@@ -32,7 +32,7 @@ class EmergencyResponse(val emergency: Emergency, private val handlingBase: Base
         return handlingBase.assignAssets(this, logger, simulationData)
     }
 
-    private fun sendAssetsHome(simulationData: SimulationData, navigation: Navigation) {
+    private fun sendAssetsHome(simulationData: SimulationData, navigation: Navigation, logger: Logger) {
         val paths = allocatedAssets(simulationData).groupBy {
             it.location
         }.mapValues { locationGroups ->
@@ -49,6 +49,11 @@ class EmergencyResponse(val emergency: Emergency, private val handlingBase: Base
                 ?: error("The strictly connectedness is a lie")
             it.currentEmergency = null
             it.atTarget = false
+            it.assignedStaff.forEach { staff ->
+                logger.numberTicksWorked--
+                staff.workedTicksThisShift--
+                staff.lastTickWorked = false
+            }
         }
     }
 
@@ -62,7 +67,7 @@ class EmergencyResponse(val emergency: Emergency, private val handlingBase: Base
             if (--emergency.handlingTime == 0) {
                 logger.emergencyResolved(emergency.id)
                 getNecessaryAssets(emergency).fulfill(allocatedAssets(simulationData).sortedBy { it.id })
-                sendAssetsHome(simulationData, navigation)
+                sendAssetsHome(simulationData, navigation, logger)
                 emergency.done = true
             }
         } else {
@@ -75,7 +80,7 @@ class EmergencyResponse(val emergency: Emergency, private val handlingBase: Base
                 logger.emergencyHandlingStart(emergency.id)
             } else if (emergency.maxDuration <= emergency.handlingTime) {
                 logger.emergencyFailed(emergency.id)
-                sendAssetsHome(simulationData, navigation)
+                sendAssetsHome(simulationData, navigation, logger)
                 emergency.done = true
             }
         }
