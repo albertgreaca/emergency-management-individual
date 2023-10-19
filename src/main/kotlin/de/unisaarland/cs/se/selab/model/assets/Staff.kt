@@ -16,8 +16,8 @@ data class Staff(
     var ticksAwayFromBase: Int = 0,
     var currentShift: Shift,
     var nextShift: Shift,
-    val doubleShift: Boolean,
-    val onCall: Boolean,
+    var doubleShift: Boolean,
+    var onCall: Boolean,
     val hasLicense: Boolean,
     var allocatedTo: Vehicle? = null,
     var unavailable: Boolean = false,
@@ -196,12 +196,9 @@ data class Staff(
     fun countTicks(logger: Logger) {
         lastTickWorked = false
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
-            val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
-            if (!em.handlingStarted || !(em.handlingTime == 1)) {
-                logger.numberTicksWorked++
-                workedTicksThisShift++
-                lastTickWorked = true
-            }
+            logger.numberTicksWorked++
+            workedTicksThisShift++
+            lastTickWorked = true
         }
         if (unavailable) {
             wasUnavailable = true

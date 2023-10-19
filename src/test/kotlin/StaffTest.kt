@@ -138,4 +138,97 @@ class StaffTest {
         assertFalse(staff.goingHome)
         assertTrue(staff.atHome)
     }
+
+    @Test
+    fun updateShifts() {
+        val staff = Staff(
+            0,
+            "Xulescu",
+            0,
+            StaffType.POLICE_OFFICER,
+            1,
+            currentShift = Shift(ShiftType.EARLY, true, false),
+            nextShift = Shift(ShiftType.LATE, false, false),
+            doubleShift = false,
+            onCall = false,
+            hasLicense = false
+        )
+        staff.updateShifts(ShiftType.LATE)
+        assertTrue(staff.currentShift == Shift(ShiftType.EARLY, true, false))
+
+        staff.updateShifts(ShiftType.EARLY)
+        assertTrue(staff.currentShift == Shift(ShiftType.LATE, false, false))
+
+        staff.updateShifts(ShiftType.LATE)
+        staff.updateShifts(ShiftType.NIGHT)
+        assertTrue(staff.currentShift == Shift(ShiftType.EARLY, true, false))
+
+        staff.doubleShift = true
+        staff.nextShift.working = true
+
+        staff.updateShifts(ShiftType.EARLY)
+        assertTrue(staff.currentShift == Shift(ShiftType.LATE, true, false))
+        staff.updateShifts(ShiftType.LATE)
+        staff.updateShifts(ShiftType.NIGHT)
+        assertTrue(staff.currentShift == Shift(ShiftType.EARLY, false, false))
+
+        staff.currentShift = Shift(ShiftType.EARLY, true, false)
+        staff.nextShift = Shift(ShiftType.LATE, false, true)
+        staff.onCall = true
+        staff.doubleShift = false
+
+        staff.updateShifts(ShiftType.EARLY)
+        assertTrue(staff.nextShift == Shift(ShiftType.NIGHT, false, false))
+
+        staff.updateShifts(ShiftType.LATE)
+        assertTrue(staff.nextShift == Shift(ShiftType.EARLY, true, false))
+
+        staff.updateShifts(ShiftType.NIGHT)
+        assertTrue(staff.nextShift == Shift(ShiftType.LATE, false, true))
+    }
+
+    @Test
+    fun updatePostion() {
+        val staff = Staff(
+            0,
+            "Xulescu",
+            0,
+            StaffType.POLICE_OFFICER,
+            3,
+            currentShift = Shift(ShiftType.EARLY, true, false),
+            nextShift = Shift(ShiftType.LATE, false, false),
+            doubleShift = false,
+            onCall = false,
+            hasLicense = false,
+            ticksAwayFromBase = 0
+        )
+        staff.allocatedTo = PoliceVehicle(0, 1, VehicleType.POLICE_CAR, 1, 1, 10, needsLicense = false)
+        staff.updatePosition()
+        assertTrue(staff.ticksAwayFromBase == 0)
+
+        staff.allocatedTo = null
+        staff.goingHome = true
+        staff.updatePosition()
+        assertTrue(staff.ticksAwayFromBase == 1)
+        staff.updatePosition()
+        staff.updatePosition()
+        assertTrue(staff.ticksAwayFromBase == 3)
+        assertTrue(staff.atHome)
+        staff.goingHome = true
+        staff.updatePosition()
+        assertTrue(staff.ticksAwayFromBase == 3)
+
+        staff.goingHome = false
+        staff.returningToBase = true
+        staff.updatePosition()
+        assertTrue(staff.ticksAwayFromBase == 2)
+
+        staff.updatePosition()
+        staff.updatePosition()
+        assertTrue(staff.atBase)
+        staff.updatePosition()
+        staff.returningToBase = true
+        staff.updatePosition()
+        assertTrue(staff.ticksAwayFromBase == 0)
+    }
 }
