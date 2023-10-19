@@ -31,10 +31,6 @@ class SicknessEvent(
                 requireNotNull(it.allocatedTo).returnB = true
             }
             it.ticksSick = duration
-            if (it.lastTickWorked) {
-                logger.numberTicksWorked--
-                it.workedTicksThisShift--
-            }
             it.setReturningHome()
         }
         return true
