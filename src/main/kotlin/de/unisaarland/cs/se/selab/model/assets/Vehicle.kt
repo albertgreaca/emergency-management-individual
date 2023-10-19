@@ -99,19 +99,26 @@ interface Vehicle {
             return
         }
         currentRoute = navigation.shortestRoute(location, navigation.simulationData.findBase(baseID).location, this)
+        var ok = false
         for (staff in assignedStaff) {
             if (staff.isSick) {
                 if (currentEmergency != null) {
                     logger.assetAllocationCanceled(id, requireNotNull(currentEmergency).id, staff.name, staff.id)
                     logger.assetReturn(id, max(1, timeToTarget))
                 }
+                ok = true
                 break
             }
-            logger.numberTicksWorked--
-            staff.workedTicksThisShift--
-            staff.lastTickWorked = false
+        }
+        if (ok) {
+            for (staff in assignedStaff) {
+                logger.numberTicksWorked--
+                staff.workedTicksThisShift--
+                staff.lastTickWorked = false
+            }
         }
         currentEmergency = null
+        atTarget = false
         manning = 0
         returnB = false
     }
