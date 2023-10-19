@@ -238,11 +238,15 @@ data class Staff(
         }
     }
 
+    private fun detekt(unavailable: Boolean, allocatedTo: Vehicle?): Boolean {
+        return unavailable || allocatedTo != null
+    }
+
     /**
      * updates where staff member goes
      */
     fun updateWhereGoing(simulationData: SimulationData) {
-        if (unavailable) {
+        if (detekt(unavailable, allocatedTo)) {
             return
         }
         if (currentShift.type != simulationData.shift) {

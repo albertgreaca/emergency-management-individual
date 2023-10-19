@@ -1,0 +1,33 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "type": "VACATION",
+      "tick": 25,
+      "duration": 1,
+      "staffID": 1
+    }
+  ],
+  "emergencyCalls": [
+    {
+      "id": 0,
+      "tick": 7,
+      "village": "Lummerland",
+      "roadName": "roadfour",
+      "emergencyType": "ACCIDENT",
+      "severity": 1,
+      "handleTime": 16,
+      "maxDuration": 100
+    },
+    {
+      "id": 1,
+      "tick": 700,
+      "village": "Lummerland",
+      "roadName": "roadfour",
+      "emergencyType": "ACCIDENT",
+      "severity": 1,
+      "handleTime": 1,
+      "maxDuration": 100
+    }
+  ]
+}

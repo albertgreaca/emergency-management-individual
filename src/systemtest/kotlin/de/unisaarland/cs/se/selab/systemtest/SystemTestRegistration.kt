@@ -23,6 +23,7 @@ import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingP
  */
 object SystemTestRegistration {
     fun registerSystemTestsReferenceImpl(manager: SystemTestManager) {
+        manager.registerTest(HeDeservesABreak())
         registerSystemTestsMutantValidation(manager)
     }
 
