@@ -69,6 +69,9 @@ class Simulation(
         emergencyPhase()
         planningPhase()
         updatePhase()
+        for (vehicle in simulationData.vehicles) {
+            vehicle.arrivedThisTick = false
+        }
     }
 
     /**

@@ -24,7 +24,8 @@ data class FireTruck(
     override var atTarget: Boolean = true,
     override var assignedStaff: MutableList<Staff> = mutableListOf(),
     override var needsLicense: Boolean,
-    override var returnB: Boolean = false
+    override var returnB: Boolean = false,
+    override var arrivedThisTick: Boolean = false
 ) : Vehicle {
     override val ready: Boolean
         get() = vehicleType != VehicleType.FIRE_TRUCK_WATER ||

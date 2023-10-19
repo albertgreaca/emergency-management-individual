@@ -207,8 +207,7 @@ data class Staff(
 
     private fun increaseSpentEmergency() {
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
-            val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
-            if (requireNotNull(allocatedTo).atTarget && (!em.handlingStarted || !(em.handlingTime == 1))) {
+            if (requireNotNull(allocatedTo).atTarget && !requireNotNull(allocatedTo).arrivedThisTick) {
                 ticksSpentAtEmergencies++
             }
         }

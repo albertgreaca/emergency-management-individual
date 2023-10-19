@@ -38,6 +38,7 @@ interface Vehicle {
     val assignedStaff: MutableList<Staff>
     val needsLicense: Boolean
     var returnB: Boolean
+    var arrivedThisTick: Boolean
 
     val target: Location
         get() = currentEmergency?.road ?: home
@@ -78,6 +79,7 @@ interface Vehicle {
         if (currentRoute is TargetReached) {
             if (!atTarget) {
                 atTarget = true
+                arrivedThisTick = true
                 return true
             } else if (atHome) {
                 restore()
