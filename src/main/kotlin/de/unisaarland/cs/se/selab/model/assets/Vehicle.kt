@@ -107,6 +107,9 @@ interface Vehicle {
                 }
                 break
             }
+            logger.numberTicksWorked--
+            staff.workedTicksThisShift--
+            staff.lastTickWorked = false
         }
         currentEmergency = null
         manning = 0

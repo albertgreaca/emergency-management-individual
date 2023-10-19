@@ -231,4 +231,57 @@ class StaffTest {
         staff.updatePosition()
         assertTrue(staff.ticksAwayFromBase == 0)
     }
+
+    @Test
+    fun updateWhereGoing() {
+        val simulationData = SimulationData(
+            GraphImpl(),
+            mutableListOf(),
+            mutableListOf(),
+            mutableListOf(),
+            mutableListOf(),
+            mutableListOf(),
+            100
+        )
+        val staff = Staff(
+            0,
+            "Xulescu",
+            0,
+            StaffType.POLICE_OFFICER,
+            3,
+            currentShift = Shift(ShiftType.EARLY, true, false),
+            nextShift = Shift(ShiftType.LATE, false, false),
+            doubleShift = false,
+            onCall = false,
+            hasLicense = false,
+            ticksAwayFromBase = 0
+        )
+        staff.unavailable = true
+        staff.updateWhereGoing(simulationData)
+        assertFalse(staff.returningToBase)
+
+        staff.unavailable = false
+        staff.allocatedTo = PoliceVehicle(0, 1, VehicleType.POLICE_CAR, 1, 1, 10, needsLicense = false)
+        staff.updateWhereGoing(simulationData)
+        assertFalse(staff.returningToBase)
+
+        staff.allocatedTo = null
+        staff.nextShift.working = true
+        staff.ticksAwayFromBase = 1
+        simulationData.tick = 9
+        staff.returningToBase = false
+        staff.updateWhereGoing(simulationData)
+        assertTrue(staff.returningToBase)
+
+        staff.nextShift.working = false
+        staff.currentShift.working = false
+        staff.updateWhereGoing(simulationData)
+        assertTrue(staff.goingHome)
+
+        staff.nextShift.working = true
+        staff.returningToBase = false
+        simulationData.tick = 8
+        staff.updateWhereGoing(simulationData)
+        assertFalse(staff.returningToBase)
+    }
 }
