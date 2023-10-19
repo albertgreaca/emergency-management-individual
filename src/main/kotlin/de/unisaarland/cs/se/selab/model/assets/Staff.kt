@@ -193,11 +193,11 @@ data class Staff(
     /**
      * counts working ticks
      */
-    fun countTicks(logger: Logger) {
+    fun countTicks(logger: Logger, simulationData: SimulationData) {
         lastTickWorked = false
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
             val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
-            if (!em.handlingStarted || !(em.handlingTime == 1)) {
+            if ((!em.handlingStarted || !(em.handlingTime == 1)) && simulationData.tick < simulationData.maxTicks - 1) {
                 logger.numberTicksWorked++
                 workedTicksThisShift++
                 lastTickWorked = true
@@ -222,7 +222,7 @@ data class Staff(
      */
     fun updateAndCount(logger: Logger, simulationData: SimulationData) {
         increaseSpentEmergency()
-        countTicks(logger)
+        countTicks(logger, simulationData)
         updateWhereGoing(simulationData)
         updatePosition()
         if (simulationData.tick % Simulation.shiftLength == Simulation.shiftEnd) {
@@ -342,7 +342,7 @@ data class Staff(
      * logs return if needed
      */
     fun logReturn(logger: Logger) {
-        if (outputLog) {
+        if (outputLog && ticksAwayFromBase == 0) {
             logger.staffReturn(name, id)
         }
         outputLog = false

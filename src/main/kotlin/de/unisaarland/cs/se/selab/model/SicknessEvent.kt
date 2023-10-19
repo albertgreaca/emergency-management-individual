@@ -17,7 +17,7 @@ class SicknessEvent(
     var affectedStaffs: List<Staff> = emptyList()
 
     override fun trigger(simulationData: SimulationData, logger: Logger): Boolean {
-        affectedStaffs = simulationData.staff.filter { it.ticksSpentAtEmergencies >= minTicks }
+        affectedStaffs = simulationData.staff.filter { it.ticksSpentAtEmergencies > minTicks && !it.isSick }
         if (affectedStaffs.isEmpty()) {
             tick++
             return false

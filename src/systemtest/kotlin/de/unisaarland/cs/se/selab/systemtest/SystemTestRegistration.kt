@@ -23,7 +23,6 @@ import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingP
  */
 object SystemTestRegistration {
     fun registerSystemTestsReferenceImpl(manager: SystemTestManager) {
-        manager.registerTest(HeDeservesABreak())
         registerSystemTestsMutantValidation(manager)
     }
 
@@ -44,6 +43,7 @@ object SystemTestRegistration {
         manager.registerTest(NoLicenseFireBase())
         manager.registerTest(DoctorsNotMatching())
         manager.registerTest(IdNotUnique())
+        manager.registerTest(HeDeservesABreak())
     }
 
     fun registerSystemTestsMutantSimulation(manager: SystemTestManager) {
