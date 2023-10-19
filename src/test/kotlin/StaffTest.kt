@@ -99,4 +99,43 @@ class StaffTest {
         staff.atBase = true
         assertFalse(staff.canBeAssignedWorking(simulationData))
     }
+
+    @Test
+    fun setStatus() {
+        val staff = Staff(
+            0,
+            "Xulescu",
+            0,
+            StaffType.POLICE_OFFICER,
+            1,
+            currentShift = Shift(ShiftType.EARLY, true, false),
+            nextShift = Shift(ShiftType.LATE, false, false),
+            doubleShift = false,
+            onCall = false,
+            hasLicense = false
+        )
+        staff.setReturningToBase()
+        assertTrue(staff.returningToBase)
+        assertFalse(staff.atBase)
+        assertFalse(staff.goingHome)
+        assertFalse(staff.atHome)
+
+        staff.setReturningHome()
+        assertFalse(staff.returningToBase)
+        assertFalse(staff.atBase)
+        assertTrue(staff.goingHome)
+        assertFalse(staff.atHome)
+
+        staff.setAtBase()
+        assertFalse(staff.returningToBase)
+        assertTrue(staff.atBase)
+        assertFalse(staff.goingHome)
+        assertFalse(staff.atHome)
+
+        staff.setAtHome()
+        assertFalse(staff.returningToBase)
+        assertFalse(staff.atBase)
+        assertFalse(staff.goingHome)
+        assertTrue(staff.atHome)
+    }
 }

@@ -196,9 +196,12 @@ data class Staff(
     fun countTicks(logger: Logger) {
         lastTickWorked = false
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
-            logger.numberTicksWorked++
-            workedTicksThisShift++
-            lastTickWorked = true
+            val em = requireNotNull(requireNotNull(allocatedTo).currentEmergency)
+            if (!em.handlingStarted || !(em.handlingTime == 1)) {
+                logger.numberTicksWorked++
+                workedTicksThisShift++
+                lastTickWorked = true
+            }
         }
         if (unavailable) {
             wasUnavailable = true
