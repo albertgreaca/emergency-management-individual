@@ -98,20 +98,22 @@ interface Vehicle {
         if (!returnB || (currentEmergency != null && requireNotNull(currentEmergency).handlingStarted)) {
             return
         }
+        if (assignedStaff.firstOrNull { it.isSick } == null) {
+            returnB = false
+            return
+        }
         currentRoute = navigation.shortestRoute(location, navigation.simulationData.findBase(baseID).location, this)
-        var ok = false
         for (staff in assignedStaff) {
             if (staff.isSick) {
                 if (currentEmergency != null) {
                     logger.assetAllocationCanceled(id, requireNotNull(currentEmergency).id, staff.name, staff.id)
                     logger.assetReturn(id, max(1, timeToTarget))
                 }
-                ok = true
                 break
             }
         }
-        if (ok) {
-            for (staff in assignedStaff) {
+        for (staff in assignedStaff) {
+            if (staff.lastTickWorked) {
                 logger.numberTicksWorked--
                 staff.workedTicksThisShift--
                 staff.lastTickWorked = false

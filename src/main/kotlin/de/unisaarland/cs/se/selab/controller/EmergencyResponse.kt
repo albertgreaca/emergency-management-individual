@@ -50,9 +50,11 @@ class EmergencyResponse(val emergency: Emergency, private val handlingBase: Base
             it.currentEmergency = null
             it.atTarget = false
             it.assignedStaff.forEach { staff ->
-                logger.numberTicksWorked--
-                staff.workedTicksThisShift--
-                staff.lastTickWorked = false
+                if (staff.lastTickWorked) {
+                    logger.numberTicksWorked--
+                    staff.workedTicksThisShift--
+                    staff.lastTickWorked = false
+                }
             }
         }
     }
