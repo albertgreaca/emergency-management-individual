@@ -98,7 +98,7 @@ interface Vehicle {
         if (!returnB || (currentEmergency != null && requireNotNull(currentEmergency).handlingStarted)) {
             return
         }
-        if (assignedStaff.firstOrNull { it.isSick } == null) {
+        if (assignedStaff.none { it.isSick }) {
             returnB = false
             return
         }
