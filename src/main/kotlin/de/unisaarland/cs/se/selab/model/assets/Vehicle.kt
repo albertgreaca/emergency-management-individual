@@ -103,11 +103,11 @@ interface Vehicle {
             if (staff.isSick) {
                 if (currentEmergency != null) {
                     logger.assetAllocationCanceled(id, requireNotNull(currentEmergency).id, staff.name, staff.id)
+                    logger.assetReturn(id, max(1, timeToTarget))
                 }
                 break
             }
         }
-        logger.assetReturn(id, max(1, timeToTarget))
         currentEmergency = null
         manning = 0
         returnB = false

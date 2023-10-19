@@ -6,7 +6,7 @@ import de.unisaarland.cs.se.selab.systemtest.api.SystemTest
  *
  */
 class IdNotUnique : SystemTest() {
-    override val name = "Number of staff doesn't match assigned staff in police station"
+    override val name = "Id not unique"
 
     override val map = "mapFiles/example_map.dot"
     override val assets = "invalidAssets/IdNotUnique.json"
