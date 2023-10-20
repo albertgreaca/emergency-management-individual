@@ -12,11 +12,14 @@ import de.unisaarland.cs.se.selab.systemtest.validationMutants.EMTwithMOTORCYCLE
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.EMTwithTRUCK
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.FIREFIGHTERwithMOTORCYCLE
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.IdNotUnique
+import de.unisaarland.cs.se.selab.systemtest.validationMutants.MinTick
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.NoLicenseFireBase
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.POLICEOFFICERwithTRUCK
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingFireStation
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingHospital
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.StaffNotMatchingPoliceStation
+import de.unisaarland.cs.se.selab.systemtest.validationMutants.WhereStaff
+import de.unisaarland.cs.se.selab.systemtest.validationMutants.WheresMyBase
 
 /**
  * Register systemtests here.
@@ -43,6 +46,9 @@ object SystemTestRegistration {
         manager.registerTest(NoLicenseFireBase())
         manager.registerTest(DoctorsNotMatching())
         manager.registerTest(IdNotUnique())
+        manager.registerTest(WheresMyBase())
+        manager.registerTest(MinTick())
+        manager.registerTest(WhereStaff())
         manager.registerTest(HeDeservesABreak())
     }
 
