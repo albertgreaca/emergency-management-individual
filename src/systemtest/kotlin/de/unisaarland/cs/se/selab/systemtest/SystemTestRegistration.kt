@@ -35,13 +35,6 @@ import de.unisaarland.cs.se.selab.systemtest.validationMutants.WheresMyBase
 object SystemTestRegistration {
     fun registerSystemTestsReferenceImpl(manager: SystemTestManager) {
         registerSystemTestsMutantValidation(manager)
-        manager.registerTest(DiffTicksOnCall())
-        manager.registerTest(EarlySickness())
-        manager.registerTest(Reroute())
-        manager.registerTest(SickCancelWay())
-        manager.registerTest(StayHealthy())
-        manager.registerTest(ShouldVacation())
-        manager.registerTest(VacationForEver())
     }
 
     fun registerSystemTestsMutantValidation(manager: SystemTestManager) {
@@ -65,6 +58,13 @@ object SystemTestRegistration {
         manager.registerTest(MinTick())
         manager.registerTest(WhereStaff())
         manager.registerTest(HeDeservesABreak())
+        manager.registerTest(DiffTicksOnCall())
+        manager.registerTest(EarlySickness())
+        manager.registerTest(Reroute())
+        manager.registerTest(SickCancelWay())
+        manager.registerTest(StayHealthy())
+        manager.registerTest(ShouldVacation())
+        manager.registerTest(VacationForEver())
     }
 
     fun registerSystemTestsMutantSimulation(manager: SystemTestManager) {
