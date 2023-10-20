@@ -8,7 +8,7 @@ import de.unisaarland.cs.se.selab.model.SimulationData
  * Class to represent staff members
  */
 data class Staff(
-    val id: Int,
+    var id: Int,
     val name: String,
     val baseID: Int,
     var staffType: StaffType,

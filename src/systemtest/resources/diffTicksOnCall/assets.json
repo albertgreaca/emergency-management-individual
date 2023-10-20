@@ -1,0 +1,95 @@
+{
+  "bases": [
+    {
+      "id": 0,
+      "baseType": "FIRE_STATION",
+      "location": 4,
+      "staff": 2
+    },
+    {
+      "id": 1,
+      "baseType": "POLICE_STATION",
+      "location": 3,
+      "staff": 1,
+      "dogs": 0
+    },
+    {
+      "id": 2,
+      "baseType": "HOSPITAL",
+      "location": 1,
+      "staff": 1,
+      "doctors": 0
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 1,
+      "baseID": 0,
+      "vehicleType": "FIRE_TRUCK_TECHNICAL",
+      "vehicleHeight": 2,
+      "staffCapacity": 2
+    },
+    {
+      "id": 2,
+      "baseID": 1,
+      "vehicleType": "POLICE_CAR",
+      "vehicleHeight": 2,
+      "staffCapacity": 1,
+      "criminalCapacity": 1
+    },
+    {
+      "id": 3,
+      "baseID": 2,
+      "vehicleType": "AMBULANCE",
+      "vehicleHeight": 2,
+      "staffCapacity": 1
+    }
+  ],
+  "staff":[
+    {
+      "id": 1,
+      "name": "One",
+      "baseID": 0,
+      "ticksHome": 2,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 12,
+      "name": "OneTwo",
+      "baseID": 0,
+      "ticksHome": 3,
+      "shift": "NIGHT",
+      "doubleShift": false,
+      "onCall": true,
+      "job": "FIREFIGHTER",
+      "drivingLicense": "TRUCK"
+    },
+    {
+      "id": 2,
+      "name": "Two",
+      "baseID": 1,
+      "ticksHome": 3,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "POLICE_OFFICER",
+      "drivingLicense": "NONE"
+    },
+    {
+      "id": 3,
+      "name": "Three",
+      "baseID": 2,
+      "ticksHome": 3,
+      "shift": "EARLY",
+      "doubleShift": false,
+      "onCall": false,
+      "job": "EMT",
+      "drivingLicense": "AMBULANCE"
+    }
+  ]
+
+}

@@ -1,0 +1,33 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "type": "SICKNESS",
+      "tick": 16,
+      "duration": 10,
+      "minTicks": 2
+    }
+  ],
+  "emergencyCalls": [
+    {
+      "id": 0,
+      "tick": 10,
+      "village": "Lummerland",
+      "roadName": "roadone",
+      "emergencyType": "ACCIDENT",
+      "severity": 1,
+      "handleTime": 2,
+      "maxDuration": 100
+    },
+    {
+      "id": 1,
+      "tick": 18,
+      "village": "Lummerland",
+      "roadName": "roadone",
+      "emergencyType": "ACCIDENT",
+      "severity": 1,
+      "handleTime": 2,
+      "maxDuration": 10
+    }
+  ]
+}

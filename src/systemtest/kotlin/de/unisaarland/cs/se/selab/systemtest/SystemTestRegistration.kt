@@ -2,6 +2,14 @@ package de.unisaarland.cs.se.selab.systemtest
 
 import de.unisaarland.cs.se.selab.systemtest.basictests.ExampleTest
 import de.unisaarland.cs.se.selab.systemtest.runner.SystemTestManager
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.DiffTicksOnCall
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.EarlySickness
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.HeDeservesABreak
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.Reroute
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.SickCancelWay
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.StayHealthy
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.ShouldVacation
+import de.unisaarland.cs.se.selab.systemtest.simulationMutants.VacationForEver
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.DOGHANDLERwithMOTORCYCLE
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.DOGHANDLERwithTRUCK
 import de.unisaarland.cs.se.selab.systemtest.validationMutants.DoctorsNotMatching
@@ -27,6 +35,13 @@ import de.unisaarland.cs.se.selab.systemtest.validationMutants.WheresMyBase
 object SystemTestRegistration {
     fun registerSystemTestsReferenceImpl(manager: SystemTestManager) {
         registerSystemTestsMutantValidation(manager)
+        manager.registerTest(DiffTicksOnCall())
+        manager.registerTest(EarlySickness())
+        manager.registerTest(Reroute())
+        manager.registerTest(SickCancelWay())
+        manager.registerTest(StayHealthy())
+        manager.registerTest(ShouldVacation())
+        manager.registerTest(VacationForEver())
     }
 
     fun registerSystemTestsMutantValidation(manager: SystemTestManager) {

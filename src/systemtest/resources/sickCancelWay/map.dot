@@ -1,0 +1,10 @@
+digraph Lummerland {
+    1;
+    2;
+    3;
+    4;
+    1 -> 2 [village=Lummerland; name=roadone; heightLimit=10; weight = 10; primaryType=mainStreet; secondaryType=none;];
+    3 -> 4 [village=Lummerland; name=roadthree; heightLimit=10; weight = 10; primaryType=sideStreet; secondaryType=none;];
+    1 -> 3 [village=Lummerland; name=roadtwo; heightLimit=10; weight = 30; primaryType=sideStreet; secondaryType=none;];
+    2 -> 4 [village=Lummerland; name=roadfour; heightLimit=10; weight = 20; primaryType=sideStreet; secondaryType=none;];
+}

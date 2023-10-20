@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "type": "TRAFFIC_JAM",
+      "tick": 100,
+      "duration": 100,
+      "source": 1,
+      "target": 3,
+      "factor": 100
+    }
+  ],
+  "emergencyCalls": [
+    {
+      "id": 0,
+      "tick": 1,
+      "village": "Lummerland",
+      "roadName": "roadone",
+      "emergencyType": "ACCIDENT",
+      "severity": 1,
+      "handleTime": 2,
+      "maxDuration": 100
+    }
+  ]
+}
