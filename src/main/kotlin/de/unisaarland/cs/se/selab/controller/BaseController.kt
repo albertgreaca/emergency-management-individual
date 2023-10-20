@@ -122,7 +122,7 @@ class BaseController<T : Vehicle>(
      * @param vehicles The vehicles that can be used.
      * @param assetInquiry The inquiry to handle.
      */
-    private fun handleInquiry(
+    fun handleInquiry(
         emergencyResponse: EmergencyResponse,
         logger: Logger,
         vehicles: List<T>,
