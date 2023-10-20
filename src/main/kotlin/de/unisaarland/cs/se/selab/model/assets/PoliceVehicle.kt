@@ -10,7 +10,7 @@ import de.unisaarland.cs.se.selab.model.map.Route
 data class PoliceVehicle(
     override val id: Int,
     override val baseID: Int,
-    override val vehicleType: VehicleType,
+    override var vehicleType: VehicleType,
     override val staffCapacity: Int,
     val criminalCapacity: Int,
     override val vehicleHeight: Int,

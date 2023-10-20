@@ -205,7 +205,10 @@ data class Staff(
         }
     }
 
-    private fun increaseSpentEmergency() {
+    /**
+     *
+     */
+    fun increaseSpentEmergency() {
         if (allocatedTo != null && requireNotNull(allocatedTo).currentEmergency != null) {
             if (requireNotNull(allocatedTo).atTarget && !requireNotNull(allocatedTo).arrivedThisTick) {
                 ticksSpentAtEmergencies++

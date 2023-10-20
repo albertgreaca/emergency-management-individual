@@ -10,7 +10,7 @@ import de.unisaarland.cs.se.selab.model.map.Route
 data class Ambulance(
     override val id: Int,
     override val baseID: Int,
-    override val vehicleType: VehicleType,
+    override var vehicleType: VehicleType,
     override val staffCapacity: Int,
     val patientCapacity: Int,
     override val vehicleHeight: Int,

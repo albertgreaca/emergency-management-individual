@@ -28,7 +28,10 @@ data class Hospital(
         }
     }
 
-    private fun cantAllocate(
+    /**
+     *
+     */
+    fun cantAllocate(
         needed: Int,
         badLicense: Boolean,
         badED: Boolean
@@ -42,7 +45,10 @@ data class Hospital(
         return false
     }
 
-    private fun updateNeeded(needed: Int, staff: Staff): Int {
+    /**
+     *
+     */
+    fun updateNeeded(needed: Int, staff: Staff): Int {
         if (!(staff.staffType == StaffType.EMERGENCY_DOCTOR)) {
             return needed - 1
         }

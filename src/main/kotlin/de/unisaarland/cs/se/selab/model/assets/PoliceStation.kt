@@ -33,7 +33,10 @@ data class PoliceStation(
         }
     }
 
-    private fun cantAllocate(
+    /**
+     *
+     */
+    fun cantAllocate(
         needed: Int,
         badLicense: Boolean,
         badDH: Boolean
@@ -47,7 +50,10 @@ data class PoliceStation(
         return false
     }
 
-    private fun updateNeeded(needed: Int, staff: Staff): Int {
+    /**
+     *
+     */
+    fun updateNeeded(needed: Int, staff: Staff): Int {
         if (!(staff.staffType == StaffType.DOG_HANDLER)) {
             return needed - 1
         }
