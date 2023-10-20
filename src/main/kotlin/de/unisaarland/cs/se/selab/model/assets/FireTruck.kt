@@ -12,8 +12,8 @@ const val REFILL_RATE = 300
 data class FireTruck(
     override val id: Int,
     override val baseID: Int,
-    override val vehicleType: VehicleType,
-    override val staffCapacity: Int,
+    override var vehicleType: VehicleType,
+    override var staffCapacity: Int,
     val waterCapacity: Int,
     val ladderLength: Int,
     override val vehicleHeight: Int,
